@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1055989708545",
+    "firebase_url": "https://insticable-4474f.firebaseio.com",
+    "project_id": "insticable-4474f",
+    "storage_bucket": "insticable-4474f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055989708545:android:06aa59a44a4596b1",
+        "android_client_info": {
+          "package_name": "com.example.ankit.insticable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055989708545-h5fcisnrr1ssv4ormnki8up9eu7g0r03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ankit.insticable",
+            "certificate_hash": "94516b81073d4b3287bb6968367612d85dc4fe63"
+          }
+        },
+        {
+          "client_id": "1055989708545-5b5pe1l81j938uggsjfm1m2k02hlsi34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbodpsRJm6vehEYD3Z1tX5BJ1KAc6aRKc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055989708545-5b5pe1l81j938uggsjfm1m2k02hlsi34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
