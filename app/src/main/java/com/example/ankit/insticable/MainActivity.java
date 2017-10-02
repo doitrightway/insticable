@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else {
+                    deletelistener();
                     startActivityForResult(
                             // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance().createSignInIntentBuilder().build(),
@@ -129,6 +130,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
+        }
+    }
+
+    private void deletelistener() {
+        if (mChildEventListener != null) {
+            mDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener=null;
         }
     }
 
