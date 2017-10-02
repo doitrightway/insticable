@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private ChildEventListener mChildEventListener;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +73,19 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null && student.getcount()==0){
-                    student.setName(user.getDisplayName());
-                    setContentView(R.layout.activity_main);
-                    student.setCount(1);
-                }
-                else if(user != null && student.getcount()==1){
+//                username=user.getDisplayName();
+                if (user != null) {
+                    username = user.getDisplayName();
+                    calllistener();
+                    if (student.getcount() == 0) {
+                        setContentView(R.layout.activity_main);
+                        student.setCount(1);
+                    }
+                    else {
+                        setContentView(R.layout.activity_main3);
+                    }
 
                 }
                 else {
@@ -86,9 +93,43 @@ public class MainActivity extends AppCompatActivity {
                             // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance().createSignInIntentBuilder().build(),
                             RC_SIGN_IN);
+
                 }
             }
+
         };
+
+
+
+    }
+    private void calllistener() {
+        if(mChildEventListener==null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
+                    if (studentobtained.getName() == username)
+                        student = studentobtained;
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+            mDatabaseReference.addChildEventListener(mChildEventListener);
+        }
     }
 
     public void coordinator(View view){
