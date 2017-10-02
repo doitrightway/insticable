@@ -4,6 +4,7 @@
 
 package com.example.ankit.insticable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class instistudent {
@@ -17,6 +18,7 @@ public class instistudent {
 
     public instistudent() {
         count=0;
+        this.interests=new ArrayList<>();
     }
 
     public instistudent(String name, int Hostel, String Department,List interests) {

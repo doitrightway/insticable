@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    List<String> interests;
+    List<String> interests=new ArrayList<>();
     instistudent student = new instistudent();
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null && student.getcount()==0){
+                    student.setName(user.getDisplayName());
                     setContentView(R.layout.activity_main);
                     student.setCount(1);
                 }
@@ -95,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
+
+    public void student(View view){
+        student.settype("student");
+//        String usename= Fire;
+        setContentView(R.layout.activity_main2);
+        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
     public void cricket(View view){
         interests.add("cricket");
     }
@@ -107,14 +115,10 @@ public class MainActivity extends AppCompatActivity {
     public void badminton(View view){
         interests.add("badminton");
     }
+    public void tennis(View view){ interests.add("tennis");   }
     public void enjoy(View view){
         student.setinterests(interests);
         mDatabaseReference.push().setValue(student);
-    }
-    public void student(View view){
-        student.settype("student");
-        setContentView(R.layout.activity_main2);
-        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
