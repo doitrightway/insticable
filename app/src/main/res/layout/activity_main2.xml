@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/cricket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cricket"
+            android:onClick="cricket"/>
+        <Button
+            android:id="@+id/football"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Football"
+            android:onClick="football"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Badminton"
+            android:onClick="badminton"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volleyball"
+            android:onClick="volleyball"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tennis"
+            android:onClick="tennis"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="enjoy"
+        android:onClick="enjoy"/>
+</LinearLayout>
