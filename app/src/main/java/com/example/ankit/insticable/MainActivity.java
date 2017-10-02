@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference().child("users");
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
@@ -103,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void badminton(View view){
         interests.add("badminton");
+    }
+    public void enjoy(View view){
+        student.setinterests(interests);
+        mDatabaseReference.push().setValue(student);
     }
     public void student(View view){
         student.settype("student");

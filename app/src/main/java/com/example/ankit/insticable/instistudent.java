@@ -54,7 +54,7 @@ public class instistudent {
         return interests;
     }
 
-    public void setName(List interests) {
+    public void setinterests(List interests) {
         this.interests = interests;
     }
 
