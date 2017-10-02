@@ -54,20 +54,28 @@ public class MainActivity extends AppCompatActivity {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
+    List<String> interests;
+    instistudent student = new instistudent();
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                if(user != null && student.getcount()==0){
+                    setContentView(R.layout.activity_main);
+                    student.setCount(1);
+                }
+                else if(user != null && student.getcount()==1){
+
                 }
                 else {
                     startActivityForResult(
@@ -79,6 +87,28 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    public void coordinator(View view){
+        student.settype("coordinator");
+        setContentView(R.layout.activity_main2);
+        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
+    public void cricket(View view){
+        interests.add("cricket");
+    }
+    public void football(View view){
+        interests.add("football");
+    }
+    public void volleyball(View view){
+        interests.add("volleyball");
+    }
+    public void badminton(View view){
+        interests.add("badminton");
+    }
+    public void student(View view){
+        student.settype("student");
+        setContentView(R.layout.activity_main2);
+        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

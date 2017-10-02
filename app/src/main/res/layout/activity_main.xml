@@ -33,6 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Coordinator"
+        android:onClick="coordinator"
         />
     <Button
         android:id="@+id/third"
@@ -42,6 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Student"
+        android:onClick="student"
         />
 
 </RelativeLayout>

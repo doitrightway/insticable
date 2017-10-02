@@ -12,8 +12,11 @@ public class instistudent {
     private int Hostel;
     private String Department;
     private List<String> interests;
+    private String type;
+    private int count;
 
     public instistudent() {
+        count=0;
     }
 
     public instistudent(String name, int Hostel, String Department,List interests) {
@@ -54,5 +57,18 @@ public class instistudent {
     public void setName(List interests) {
         this.interests = interests;
     }
+
+    public String gettype() {
+        return type;
+    }
+
+    public void settype(String type) {
+        this.type = type;
+    }
+
+    public int getcount(){return count;}
+
+    public void setCount(int count){this.count=count;}
+
 }
 
