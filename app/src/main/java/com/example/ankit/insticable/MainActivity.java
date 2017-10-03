@@ -92,18 +92,18 @@ public class MainActivity extends AppCompatActivity {
                     if (student.getcount()==0) {
                         setContentView(R.layout.activity_main);
                     }
-                    else {
+//                    else {
 //                        TextView t= (TextView) findViewById(R.id.t1);
 //                        if(student.getName().equals(username))
-                        setContentView(R.layout.activity_main3);
-                    }
+//                        setContentView(R.layout.activity_main3);
+//                    }
 
                 }
                 else {
                     deletelistener();
                     startActivityForResult(
                             // Get an instance of AuthUI based on the default app
-                            AuthUI.getInstance().createSignInIntentBuilder().build(),
+                            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).build(),
                             RC_SIGN_IN);
 
                 }
@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
+//        student=null;
         deletelistener();
 
     }
@@ -203,9 +204,8 @@ public class MainActivity extends AppCompatActivity {
                     if ((studentobtained.getName()).equals(username)) {
                         student = studentobtained;
                         if(student.getcount()==1)
-                        {
-                            setContentView(R.layout.activity_main2);
-                        }
+                        setContentView(R.layout.activity_main3);
+
                     }
                 }
 
@@ -232,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
         if (mChildEventListener != null) {
             mDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener=null;
+            student=new instistudent();
         }
     }
 }
