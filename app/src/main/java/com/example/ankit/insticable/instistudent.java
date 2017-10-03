@@ -51,6 +51,9 @@ public class instistudent {
     public void setDepartment(String Department) {
         this.Department = Department;
     }
+    public void setHostel(int Hostel) {
+        this.Hostel = Hostel;
+    }
 
     public List<String> getinterests() {
         return interests;

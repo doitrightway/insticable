@@ -161,6 +161,14 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
     public void continue1(View view){
+//        student.setDepartment
+                EditText dept= (EditText) findViewById(R.id.Dept1);
+                String dept1= (dept.getText()).toString();
+            student.setDepartment(dept1);
+        EditText hostel= (EditText) findViewById(R.id.Hostel1);
+        String hostel1= (hostel.getText()).toString();
+        student.setHostel(Integer.parseInt(hostel1));
+        setContentView(R.layout.activity_main2);
     }
     public void cricket(View view){
         interests.add("cricket");
