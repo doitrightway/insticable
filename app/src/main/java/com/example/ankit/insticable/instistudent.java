@@ -21,7 +21,7 @@ public class instistudent {
         this.interests=new ArrayList<>();
     }
 
-    public instistudent(String name, int Hostel, String Department,List interests) {
+    public instistudent(String name, int Hostel, String Department,List<String> interests) {
         this.name = name;
         this.Hostel= Hostel;
         this.Department=Department;
@@ -56,7 +56,7 @@ public class instistudent {
         return interests;
     }
 
-    public void setinterests(List interests) {
+    public void setinterests(List<String> interests) {
         this.interests = interests;
     }
 

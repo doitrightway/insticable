@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -50,22 +51,31 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final String TAG = "MainActivity";
-    public static final String ANONYMOUS = "anonymous";
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+//    private static final String TAG = "MainActivity";
+//    public static final String ANONYMOUS = "anonymous";
+//    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    List<String> interests=new ArrayList<>();
-    instistudent student = new instistudent();
 
+
+    instistudent student = new instistudent();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ChildEventListener mChildEventListener;
     private String username;
+    List<String> interests=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if (student.getcount()==0) {
+//            setContentView(R.layout.activity_main);
+//        }
+//        else {
+//                        TextView t= (TextView) findViewById(R.id.t1);
+//                        if(student.getName().equals(username))
+//            setContentView(R.layout.activity_main3);
+//        }
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("users");
@@ -79,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null) {
                     username = user.getDisplayName();
                     calllistener();
-                    if (student.getcount() == 0) {
+                    if (student.getcount()==0) {
                         setContentView(R.layout.activity_main);
-                        student.setCount(1);
                     }
                     else {
+//                        TextView t= (TextView) findViewById(R.id.t1);
+//                        if(student.getName().equals(username))
                         setContentView(R.layout.activity_main3);
                     }
 
@@ -103,72 +114,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void calllistener() {
-        if(mChildEventListener==null) {
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
-                    if (studentobtained.getName() == username)
-                        student = studentobtained;
-                }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
 
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            };
-            mDatabaseReference.addChildEventListener(mChildEventListener);
-        }
-    }
-
-    private void deletelistener() {
-        if (mChildEventListener != null) {
-            mDatabaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener=null;
-        }
-    }
-
-    public void coordinator(View view){
-        student.settype("coordinator");
-        setContentView(R.layout.activity_main2);
-        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
-    }
-
-    public void student(View view){
-        student.settype("student");
-//        String usename= Fire;
-        setContentView(R.layout.activity_main2);
-        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
-    }
-    public void cricket(View view){
-        interests.add("cricket");
-    }
-    public void football(View view){
-        interests.add("football");
-    }
-    public void volleyball(View view){
-        interests.add("volleyball");
-    }
-    public void badminton(View view){
-        interests.add("badminton");
-    }
-    public void tennis(View view){ interests.add("tennis");   }
-    public void enjoy(View view){
-        student.setinterests(interests);
-        mDatabaseReference.push().setValue(student);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -199,6 +147,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public void coordinator(View view){
+        student.settype("coordinator");
+        setContentView(R.layout.activity_main2);
+        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
+
+    public void student(View view){
+        student.settype("student");
+//        String usename= Fire;
+        setContentView(R.layout.activity_main2);
+        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
+    public void cricket(View view){
+        interests.add("cricket");
+    }
+    public void football(View view){
+        interests.add("football");
+    }
+    public void volleyball(View view){
+        interests.add("volleyball");
+    }
+    public void badminton(View view){
+        interests.add("badminton");
+    }
+    public void tennis(View view){ interests.add("tennis");   }
+    public void enjoy(View view){
+        student.setinterests(interests);
+        student.setName(username);
+        student.setCount(1);
+        mDatabaseReference.push().setValue(student);
+    }
     @Override
     protected void onResume(){
         super.onResume();
@@ -210,6 +190,48 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        }
+        deletelistener();
+
+    }
+    private void calllistener() {
+//        if(mChildEventListener==null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
+                    if ((studentobtained.getName()).equals(username)) {
+                        student = studentobtained;
+                        if(student.getcount()==1)
+                        {
+                            setContentView(R.layout.activity_main2);
+                        }
+                    }
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+            mDatabaseReference.addChildEventListener(mChildEventListener);
+//        }
+    }
+    private void deletelistener() {
+        if (mChildEventListener != null) {
+            mDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener=null;
         }
     }
 }
