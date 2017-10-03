@@ -233,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
             mDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener=null;
             student=new instistudent();
+            interests=new ArrayList<>();
         }
     }
 }
