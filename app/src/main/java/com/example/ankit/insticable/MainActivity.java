@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     deletelistener();
                     startActivityForResult(
                             // Get an instance of AuthUI based on the default app
-                            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).build(),
+                            AuthUI.getInstance().createSignInIntentBuilder().build(),
                             RC_SIGN_IN);
 
                 }
@@ -150,15 +150,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void coordinator(View view){
         student.settype("coordinator");
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main4);
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
 
     public void student(View view){
         student.settype("student");
 //        String usename= Fire;
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main4);
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+    }
+    public void continue1(View view){
     }
     public void cricket(View view){
         interests.add("cricket");
