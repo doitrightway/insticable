@@ -10,29 +10,39 @@ import java.util.List;
 public class instistudent {
 
     private String name;
-    private int Hostel;
+    private String Hostel;
     private String Department;
     private List<String> interests;
     private String type;
     private int count;
+    private String Degree;
 
     public instistudent() {
         count=0;
         this.interests=new ArrayList<>();
     }
 
-    public instistudent(String name, int Hostel, String Department,List<String> interests) {
+    public instistudent(String name, String Hostel, String Department,List<String> interests,String Degree) {
         this.name = name;
         this.Hostel= Hostel;
         this.Department=Department;
         this.interests=interests;
+        this.Degree=Degree;
     }
 
-    public int getHostel() {
+    public String getHostel() {
         return Hostel;
     }
 
-    public void setText(int Hostel) {
+    public String getDegree() {
+        return Degree;
+    }
+
+    public void setDegree(String degree) {
+        Degree = degree;
+    }
+
+    public void setHostel(String Hostel) {
         this.Hostel = Hostel;
     }
 
@@ -50,9 +60,6 @@ public class instistudent {
 
     public void setDepartment(String Department) {
         this.Department = Department;
-    }
-    public void setHostel(int Hostel) {
-        this.Hostel = Hostel;
     }
 
     public List<String> getinterests() {

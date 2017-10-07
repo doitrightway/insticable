@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -55,16 +56,18 @@ public class MainActivity extends AppCompatActivity {
 //    public static final String ANONYMOUS = "anonymous";
 //    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-
-
     instistudent student = new instistudent();
+    events event = new events();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ChildEventListener mChildEventListener;
+    private DatabaseReference meventReference;
+    private ChildEventListener meventListener;
     private String username;
     List<String> interests=new ArrayList<>();
+    public List<events> eventsList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("users");
-
+        meventReference = mFirebaseDatabase.getReference().child("events");
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
@@ -105,16 +108,10 @@ public class MainActivity extends AppCompatActivity {
                             // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance().createSignInIntentBuilder().build(),
                             RC_SIGN_IN);
-
                 }
             }
-
         };
-
-
-
     }
-
 
 
     @Override
@@ -150,45 +147,101 @@ public class MainActivity extends AppCompatActivity {
 
     public void coordinator(View view){
         student.settype("coordinator");
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_main2);
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
 
     public void student(View view){
         student.settype("student");
 //        String usename= Fire;
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_main2);
         //startActivity(new Intent(MainActivity.this, Main2Activity.class));
     }
     public void continue1(View view){
 //        student.setDepartment
-                EditText dept= (EditText) findViewById(R.id.Dept1);
-                String dept1= (dept.getText()).toString();
-            student.setDepartment(dept1);
+        EditText dept= (EditText) findViewById(R.id.Dept1);
+        String dept1= (dept.getText()).toString();
+        student.setDepartment(dept1);
         EditText hostel= (EditText) findViewById(R.id.Hostel1);
         String hostel1= (hostel.getText()).toString();
-        student.setHostel(Integer.parseInt(hostel1));
-        setContentView(R.layout.activity_main2);
+        student.setHostel(hostel1);
+        EditText degree= (EditText) findViewById(R.id.Degree1);
+        String degree1= (degree.getText()).toString();
+        student.setHostel(degree1);
+        setContentView(R.layout.activity_main3);
     }
+
     public void cricket(View view){
-        interests.add("cricket");
+            //code to check if this checkbox is checked!
+            CheckBox checkBox = (CheckBox)view;
+            if(checkBox.isChecked()){
+                interests.add("cricket");
+            }
     }
+
     public void football(View view){
-        interests.add("football");
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("football");
+        }
     }
-    public void volleyball(View view){
-        interests.add("volleyball");
+
+    public void tennis(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("tennis");
+        }
     }
-    public void badminton(View view){
-        interests.add("badminton");
+
+    public void squash(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("squash");
+        }
     }
-    public void tennis(View view){ interests.add("tennis");   }
+    public void swimming(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("swimming");
+        }
+    }
+
+    public void carrom(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("carrom");
+        }
+    }
+
+    public void chess(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("chess");
+        }
+    }
+
+    public void music(View view){
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)view;
+        if(checkBox.isChecked()){
+            interests.add("music");
+        }
+    }
+
     public void enjoy(View view){
         student.setinterests(interests);
         student.setName(username);
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
+        display();
     }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -203,8 +256,50 @@ public class MainActivity extends AppCompatActivity {
         }
 //        student=null;
         deletelistener();
-
     }
+    public void display(){
+
+        final List<String> interests = student.getinterests();
+        meventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                events eventobtained = dataSnapshot.getValue(events.class);
+                event=eventobtained;
+                String eventtag=event.getInteresttag();
+                for(int i=0;i<interests.size();i++){
+                    if(interests.get(i)==eventtag){
+                        eventsList.add(event);
+                    }
+                }
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        meventReference.addChildEventListener(meventListener);
+        if(student.gettype()=="student") {
+            setContentView(R.layout.activity_main_stu);
+//            GestureActivity myactivity = new GestureActivity();
+//            myactivity.organizer(eventsList, student);
+            //setContentView(R.layout.activity_gesture);
+        }
+        else if(student.gettype()=="coordinator"){
+//            GesturecoActivity myactivity = new GesturecoActivity();
+//            myactivity.organizer(eventsList, student);
+            //setContentView(R.layout.activity_gesture);
+        }
+    }
+
+
     private void calllistener() {
 //        if(mChildEventListener==null) {
             mChildEventListener = new ChildEventListener() {
@@ -214,8 +309,7 @@ public class MainActivity extends AppCompatActivity {
                     if ((studentobtained.getName()).equals(username)) {
                         student = studentobtained;
                         if(student.getcount()==1)
-                        setContentView(R.layout.activity_main3);
-
+                            display();
                     }
                 }
 
@@ -241,9 +335,13 @@ public class MainActivity extends AppCompatActivity {
     private void deletelistener() {
         if (mChildEventListener != null) {
             mDatabaseReference.removeEventListener(mChildEventListener);
+            meventReference.removeEventListener(meventListener);
             mChildEventListener=null;
+            meventListener=null;
             student=new instistudent();
             interests=new ArrayList<>();
+            event=new events();
+            eventsList=new ArrayList<>();
         }
     }
 }

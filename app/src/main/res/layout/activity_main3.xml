@@ -1,10 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/t1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    />
-</LinearLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
+
+                                <CheckBox
+                                    android:id="@+id/checkBox11"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Cricket"
+                                    android:onClick="cricket"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox12"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="FootBall"
+                                    android:onClick="football"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox13"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Tennis"
+                                    android:onClick="tennis"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox14"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Squash"
+                                    android:onClick="squash"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox15"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Swimming"
+                                    android:onClick="swimming"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox17"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Carrom"
+                                    android:onClick="carrom"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox18"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Chess"
+                                    android:onClick="chess"/>
+
+                                <CheckBox
+                                    android:id="@+id/checkBox19"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:text="Music"
+                                    android:onClick="music"/>
+
+                        </LinearLayout>
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Go!"
+                    android:layout_alignParentBottom="true"
+                    android:onClick="enjoy"/>
+</RelativeLayout>
