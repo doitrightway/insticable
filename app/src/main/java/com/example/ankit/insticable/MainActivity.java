@@ -260,39 +260,39 @@ public class MainActivity extends AppCompatActivity {
     public void display(){
 
         final List<String> interests = student.getinterests();
-        meventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                events eventobtained = dataSnapshot.getValue(events.class);
-                event=eventobtained;
-                String eventtag=event.getInteresttag();
-                for(int i=0;i<interests.size();i++){
-                    if(interests.get(i)==eventtag){
-                        eventsList.add(event);
-                    }
-                }
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        meventReference.addChildEventListener(meventListener);
-        if(student.gettype()=="student") {
+//        meventListener = new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                events eventobtained = dataSnapshot.getValue(events.class);
+//                event=eventobtained;
+//                String eventtag=event.getInteresttag();
+//                for(int i=0;i<interests.size();i++){
+//                    if(interests.get(i)==eventtag){
+//                        eventsList.add(event);
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//            }
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//            }
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        };
+////        meventReference.addChildEventListener(meventListener);
+        if(student.gettype().equals("student")) {
             setContentView(R.layout.activity_main_stu);
 //            GestureActivity myactivity = new GestureActivity();
 //            myactivity.organizer(eventsList, student);
             //setContentView(R.layout.activity_gesture);
         }
-        else if(student.gettype()=="coordinator"){
+        else if(student.gettype().equals("coordinator")){
 //            GesturecoActivity myactivity = new GesturecoActivity();
 //            myactivity.organizer(eventsList, student);
             //setContentView(R.layout.activity_gesture);
@@ -335,13 +335,17 @@ public class MainActivity extends AppCompatActivity {
     private void deletelistener() {
         if (mChildEventListener != null) {
             mDatabaseReference.removeEventListener(mChildEventListener);
-            meventReference.removeEventListener(meventListener);
-            mChildEventListener=null;
-            meventListener=null;
-            student=new instistudent();
+            mChildEventListener = null;
+
+        }
+            if (meventListener != null) {
+                meventReference.removeEventListener(meventListener);
+                meventListener = null;
+            }
+                student=new instistudent();
             interests=new ArrayList<>();
             event=new events();
             eventsList=new ArrayList<>();
-        }
+
     }
 }
