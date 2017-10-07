@@ -173,64 +173,88 @@ public class MainActivity extends AppCompatActivity {
 
     public void cricket(View view){
             //code to check if this checkbox is checked!
-            CheckBox checkBox = (CheckBox)view;
-            if(checkBox.isChecked()){
-                interests.add("cricket");
-            }
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            interests.add("cricket");
+        }
+        else{
+            interests.remove("cricket");
+        }
     }
 
     public void football(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("football");
+        }
+        else{
+            interests.remove("football");
         }
     }
 
     public void tennis(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("tennis");
+        }
+        else{
+            interests.remove("tennis");
         }
     }
 
     public void squash(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("squash");
+        }
+        else{
+            interests.remove("squash");
         }
     }
     public void swimming(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("swimming");
+        }
+        else{
+            interests.remove("swimming");
         }
     }
 
     public void carrom(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("carrom");
+        }
+        else{
+            interests.remove("carrom");
         }
     }
 
     public void chess(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("chess");
+        }
+        else{
+            interests.remove("chess");
         }
     }
 
     public void music(View view){
         //code to check if this checkbox is checked!
-        CheckBox checkBox = (CheckBox)view;
-        if(checkBox.isChecked()){
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
             interests.add("music");
+        }
+        else{
+            interests.remove("music");
         }
     }
 
@@ -286,13 +310,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         meventReference.addChildEventListener(meventListener);
-        if(student.gettype()=="student") {
+        if(student.gettype().equals("student")) {
             setContentView(R.layout.activity_main_stu);
 //            GestureActivity myactivity = new GestureActivity();
 //            myactivity.organizer(eventsList, student);
             //setContentView(R.layout.activity_gesture);
         }
-        else if(student.gettype()=="coordinator"){
+        else if(student.gettype().equals("coordinator")){
 //            GesturecoActivity myactivity = new GesturecoActivity();
 //            myactivity.organizer(eventsList, student);
             //setContentView(R.layout.activity_gesture);
