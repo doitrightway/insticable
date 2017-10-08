@@ -41,7 +41,7 @@ public class RVadapter_co extends RecyclerView.Adapter<RVadapter_co.EventViewHol
             name = (TextView)itemView.findViewById(R.id.name);
             date = (TextView)itemView.findViewById(R.id.date);
             time = (TextView)itemView.findViewById(R.id.time);
-            image = (ImageView)itemView.findViewById(R.id.image);
+//            image = (ImageView)itemView.findViewById(R.id.image);
             venue = (TextView)itemView.findViewById(R.id.venue);
 //            btnButton1= (Button)itemView.findViewById(R.id.getinfo);
             description=(TextView)itemView.findViewById(R.id.despe);

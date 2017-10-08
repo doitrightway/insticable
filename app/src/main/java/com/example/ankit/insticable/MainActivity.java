@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener meventListener;
     private String username;
     List<String> interests=new ArrayList<>();
+    List<String> intereststags=new ArrayList<>();
     public List<events> eventsList = new ArrayList<>();
 //    private RecyclerView mRecyclerView;
 //    private RVAdapter adapter;
@@ -292,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         student.setName(username);
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
-        display();
+        calllistener();
     }
 
     @Override
@@ -317,20 +318,24 @@ public class MainActivity extends AppCompatActivity {
         meventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
                 events eventobtained = dataSnapshot.getValue(events.class);
                 event=eventobtained;
-                assert event != null;
-                String eventtag=event.getInteresttag();
+                //assert event != null;
+                Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
+                List<String> interestsobtained=event.getInterests();
 //                for(int i=0;i<interests.size();i++){
 //                    if(interests.get(i).equals(eventtag)){
 //                        eventsList.add(event);
 //                    }
 //                }
-                Toast.makeText(getApplicationContext(),"buffalo" , Toast.LENGTH_SHORT).show();
-                if (interests.contains(eventtag)) {
-                    Toast.makeText(getApplicationContext(),"event" , Toast.LENGTH_SHORT).show();
-                    eventsList.add(event);
-
+//                Toast.makeText(getApplicationContext(),"buffalo" , Toast.LENGTH_SHORT).show();
+                for(int i=0;i<interestsobtained.size();i++) {
+                    if (interests.contains(interestsobtained.get(i))) {
+                        Toast.makeText(getApplicationContext(), "event", Toast.LENGTH_SHORT).show();
+                        eventsList.add(event);
+                        break;
+                    }
                 }
                 display_final(eventsList);
             }
@@ -349,6 +354,7 @@ public class MainActivity extends AppCompatActivity {
         };
         Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
         meventReference.addChildEventListener(meventListener);
+        //display_final(eventsList);
 //        if(student.gettype().equals("student")) {
 //            Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
 //            RecyclerView mRecyclerView;
@@ -454,17 +460,109 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_cre);
 
     }
-    public void push(View view){
-        EditText interest=(EditText) findViewById(R.id.interest);
+
+    public void cricket_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("cricket");
+        }
+        else{
+            intereststags.remove("cricket");
+        }
+    }
+
+    public void football_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("football");
+        }
+        else{
+            intereststags.remove("football");
+        }
+    }
+
+    public void tennis_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("tennis");
+        }
+        else{
+            intereststags.remove("tennis");
+        }
+    }
+
+    public void squash_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("squash");
+        }
+        else{
+            intereststags.remove("squash");
+        }
+    }
+    public void swimming_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("swimming");
+        }
+        else{
+            intereststags.remove("swimming");
+        }
+    }
+
+    public void carrom_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("carrom");
+        }
+        else{
+            intereststags.remove("carrom");
+        }
+    }
+
+    public void chess_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("chess");
+        }
+        else{
+            intereststags.remove("chess");
+        }
+    }
+
+    public void music_cre(View view){
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            intereststags.add("music");
+        }
+        else{
+            intereststags.remove("music");
+        }
+    }
+
+    public void push_cre(View view){
+        EditText name=(EditText) findViewById(R.id.namecre);
         EditText date = (EditText) findViewById(R.id.datecre);
         EditText venue = (EditText) findViewById(R.id.venuecre);
         EditText time = (EditText) findViewById(R.id.timecre);
+        EditText description = (EditText) findViewById(R.id.descriptioncre);
         events event = new events();
+        event.setName(name.getText().toString());
         event.setDate(date.getText().toString());
         event.setTime(time.getText().toString());
         event.setVenue(venue.getText().toString());
-        event.setInteresttag(interest.getText().toString());
+        event.setDescription(description.getText().toString());
+        event.setInterests(intereststags);
         meventReference.push().setValue(event);
+        eventsList=new ArrayList<>();
         display();
     }
 
@@ -512,6 +610,7 @@ public class MainActivity extends AppCompatActivity {
             meventListener=null;
             student=new instistudent();
             interests=new ArrayList<>();
+            intereststags=new ArrayList<>();
             event=new events();
             eventsList=new ArrayList<>();
         }

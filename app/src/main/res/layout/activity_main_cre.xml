@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="interest"/>-->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/interest"/>-->
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -9,11 +27,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="interest"/>
+            android:text="EventName"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/interest"/>
+            android:id="@+id/namecre"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,11 +74,90 @@
             android:id="@+id/venuecre"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EventDescription"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptioncre"/>
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:layout_marginTop="40dp"
+            android:text="Choose interest groups"/>
+
+    <CheckBox
+        android:id="@+id/checkBox11"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Cricket"
+        android:onClick="cricket_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox12"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="FootBall"
+        android:onClick="football_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox13"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Tennis"
+        android:onClick="tennis_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox14"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Squash"
+        android:onClick="squash_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox15"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Swimming"
+        android:onClick="swimming_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox17"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Carrom"
+        android:onClick="carrom_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox18"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Chess"
+        android:onClick="chess_cre"/>
+
+    <CheckBox
+        android:id="@+id/checkBox19"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Music"
+        android:onClick="music_cre"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="go"
-        android:onClick="push"/>
+        android:onClick="push_cre"/>
 
 </LinearLayout>
+</ScrollView>

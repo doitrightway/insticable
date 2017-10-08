@@ -1,5 +1,7 @@
 package com.example.ankit.insticable;
 
+import java.util.List;
+
 /**
  * Created by ankit on 3/10/17.
  */
@@ -10,7 +12,7 @@ public class events {
     private String time;
     private String venue;
     private String description;
-    private String interesttag;
+    private List<String>interests;
 
 
 
@@ -18,12 +20,13 @@ public class events {
     }
 
 
-    public events(String date, String time, String venue, String description, String name) {
+    public events(String date, String time, String venue, String description, String name,List<String> interests) {
         this.date = date;
         this.time = time;
         this.venue = venue;
         this.description = description;
         this.name=name;
+        this.interests=interests;
 
     }
 
@@ -35,14 +38,13 @@ public class events {
         this.name = name;
     }
 
-    public String getInteresttag() {
-        return interesttag;
+    public List<String> getInterests() {
+        return interests;
     }
 
-    public void setInteresttag(String interesttag) {
-        this.interesttag = interesttag;
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
     }
-
 
     public String getDate() {
 
