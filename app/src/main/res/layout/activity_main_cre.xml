@@ -157,7 +157,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="go"
-        android:onClick="push_cre"/>
+        android:onClick="push_cre"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>
 </ScrollView>

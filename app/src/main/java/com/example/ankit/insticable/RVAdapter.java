@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.List;
 
 import static android.R.attr.description;
@@ -62,6 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+        YoYo.with(Techniques.FlipInY).playOn(personViewHolder.cv);
         personViewHolder.name.setText(eventsList.get(i).getName());
         personViewHolder.date.setText(eventsList.get(i).getDate());
         personViewHolder.time.setText(eventsList.get(i).getTime());

@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.FractionRes;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 //    private static final String TAG = "MainActivity";
 //    public static final String ANONYMOUS = "anonymous";
 //    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    FloatingActionButton fab;
     public static final int RC_SIGN_IN = 1;
     instistudent student = new instistudent();
     events event = new events();
@@ -174,19 +176,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+//
     public void coordinator(View view){
-        student.settype("coordinator");
-        setContentView(R.layout.activity_main2);
-        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            student.settype("coordinator");        }
+        else{
+            student.settype("");        }
     }
 
     public void student(View view){
-        student.settype("student");
-//        String usename= Fire;
-        setContentView(R.layout.activity_main2);
-        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+        //code to check if this checkbox is checked!
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            student.settype("student");        }
+        else{
+            student.settype("");
+        }
     }
+
+//    public void coordinator(View view){
+//        student.settype("coordinator");
+//        //setContentView(R.layout.activity_main2);
+//        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+//    }
+//
+//    public void student(View view){
+//        student.settype("student");
+////        String usename= Fire;
+//        //setContentView(R.layout.activity_main2);
+//        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
+//    }
     public void continue1(View view){
 //        student.setDepartment
         EditText dept= (EditText) findViewById(R.id.Dept1);
@@ -198,6 +219,15 @@ public class MainActivity extends AppCompatActivity {
         EditText degree= (EditText) findViewById(R.id.Degree1);
         String degree1= (degree.getText()).toString();
         student.setHostel(degree1);
+        CheckBox cordi=(CheckBox) findViewById(R.id.cordi);
+        CheckBox stu=(CheckBox) findViewById(R.id.stu);
+        if(cordi.isChecked())
+        {
+            student.settype("coordinator");
+        }
+        else {
+            student.settype("student");
+        }
         setContentView(R.layout.activity_main3);
     }
 
@@ -234,14 +264,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void squash(View view){
+    public void squash(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
+        if (checked) {
             interests.add("squash");
-        }
-        else{
+        } else {
             interests.remove("squash");
+
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            //mRecyclerView.setHasFixedSize(true);
+
+            // use a linear layout manager
         }
     }
     public void swimming(View view){
@@ -293,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         student.setName(username);
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
+        //display();
         calllistener();
     }
 
@@ -314,15 +350,16 @@ public class MainActivity extends AppCompatActivity {
     public void display(){
 
         final List<String> interests = student.getinterests();
-        Toast.makeText(getApplicationContext(),"first" , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"first" , Toast.LENGTH_SHORT).show();
+        eventsList=new ArrayList<>();
         meventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
                 events eventobtained = dataSnapshot.getValue(events.class);
                 event=eventobtained;
                 //assert event != null;
-                Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
                 List<String> interestsobtained=event.getInterests();
 //                for(int i=0;i<interests.size();i++){
 //                    if(interests.get(i).equals(eventtag)){
@@ -332,12 +369,14 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(),"buffalo" , Toast.LENGTH_SHORT).show();
                 for(int i=0;i<interestsobtained.size();i++) {
                     if (interests.contains(interestsobtained.get(i))) {
-                        Toast.makeText(getApplicationContext(), "event", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "event", Toast.LENGTH_SHORT).show();
                         eventsList.add(event);
                         break;
                     }
                 }
+                Toast.makeText(getApplicationContext(), "beforedisplayfinal", Toast.LENGTH_SHORT).show();
                 display_final(eventsList);
+                Toast.makeText(getApplicationContext(), "afterdisplayfinal", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -352,8 +391,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
         meventReference.addChildEventListener(meventListener);
+        Toast.makeText(getApplicationContext(), "aftelistener", Toast.LENGTH_SHORT).show();
         //display_final(eventsList);
 //        if(student.gettype().equals("student")) {
 //            Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
@@ -407,18 +447,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void display_final(List<events> eventsList){
         if(student.gettype().equals("student")) {
-            Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
             RecyclerView mRecyclerView;
             RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
             setContentView(R.layout.activity_recycle);
             mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            //mRecyclerView.setHasFixedSize(true);
-
-            // use a linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
             adapter = new RVAdapter(eventsList);
@@ -453,13 +487,22 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setLayoutManager(mLayoutManager);
             adapter = new RVadapter_co(eventsList);
             mRecyclerView.setAdapter(adapter);
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener()
+            {
+
+                @Override
+                public void onClick(View v) {
+                    setContentView(R.layout.activity_main_cre);
+                }
+            });
         }
     }
 
-    public void createevent(View view){
-        setContentView(R.layout.activity_main_cre);
-
-    }
+//    public void createevent(View view){
+//        setContentView(R.layout.activity_main_cre);
+//
+//    }
 
     public void cricket_cre(View view){
         //code to check if this checkbox is checked!
@@ -574,10 +617,13 @@ public class MainActivity extends AppCompatActivity {
                     instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
                     assert studentobtained != null;
                     if ((studentobtained.getName()).equals(username)) {
-                        Toast.makeText(getApplicationContext(),"student" , Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"student" , Toast.LENGTH_SHORT).show();
                         student = studentobtained;
-                        if(student.getcount()==1)
+                        if(student.getcount()==1) {
                             display();
+//                        display_final(eventsList);
+                            Toast.makeText(getApplicationContext(), "aftedisplay", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -598,7 +644,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
-            Toast.makeText(getApplicationContext(),"stupid" , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"stupid" , Toast.LENGTH_SHORT).show();
 
 //        }
     }
