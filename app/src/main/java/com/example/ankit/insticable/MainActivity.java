@@ -179,21 +179,21 @@ public class MainActivity extends AppCompatActivity {
 //
     public void coordinator(View view){
         //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            student.settype("coordinator");        }
-        else{
-            student.settype("");        }
+//        boolean checked = ((CheckBox) view).isChecked();
+//        if(checked) {
+//            student.settype("coordinator");        }
+//        else{
+//            student.settype("");        }
     }
 
     public void student(View view){
         //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            student.settype("student");        }
-        else{
-            student.settype("");
-        }
+//        boolean checked = ((CheckBox) view).isChecked();
+//        if(checked) {
+//            student.settype("student");        }
+//        else{
+//            student.settype("");
+//        }
     }
 
 //    public void coordinator(View view){
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
         //display();
-        calllistener();
+        //calllistener();
     }
 
     @Override
@@ -374,9 +374,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                Toast.makeText(getApplicationContext(), "beforedisplayfinal", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "beforedisplayfinal", Toast.LENGTH_SHORT).show();
                 display_final(eventsList);
-                Toast.makeText(getApplicationContext(), "afterdisplayfinal", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "afterdisplayfinal", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -393,7 +393,8 @@ public class MainActivity extends AppCompatActivity {
         };
         //Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
         meventReference.addChildEventListener(meventListener);
-        Toast.makeText(getApplicationContext(), "aftelistener", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "eventlistener", Toast.LENGTH_SHORT).show();
+        //eventsList=new ArrayList<>();
         //display_final(eventsList);
 //        if(student.gettype().equals("student")) {
 //            Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
@@ -445,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
-    public void display_final(List<events> eventsList){
+    public void display_final(List<events> eventslist){
         if(student.gettype().equals("student")) {
             //Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
             RecyclerView mRecyclerView;
@@ -455,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView = (RecyclerView) findViewById(R.id.rv);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            adapter = new RVAdapter(eventsList);
+            adapter = new RVAdapter(eventslist);
             mRecyclerView.setAdapter(adapter);
 
             //         mRecyclerView.setAdapter(adapter);
@@ -485,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
             // use a linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            adapter = new RVadapter_co(eventsList);
+            adapter = new RVadapter_co(eventslist);
             mRecyclerView.setAdapter(adapter);
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener()
@@ -605,8 +606,8 @@ public class MainActivity extends AppCompatActivity {
         event.setDescription(description.getText().toString());
         event.setInterests(intereststags);
         meventReference.push().setValue(event);
-        eventsList=new ArrayList<>();
-        display();
+        //eventsList=new ArrayList<>();
+        //display();
     }
 
     private void calllistener() {
@@ -622,7 +623,7 @@ public class MainActivity extends AppCompatActivity {
                         if(student.getcount()==1) {
                             display();
 //                        display_final(eventsList);
-                            Toast.makeText(getApplicationContext(), "aftedisplay", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "studentdisplay", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
