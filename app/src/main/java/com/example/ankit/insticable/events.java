@@ -13,7 +13,7 @@ public class events {
     private String venue;
     private String description;
     private List<String>interests;
-
+    private String photoUrl;
 
 
     public events() {
@@ -49,6 +49,11 @@ public class events {
     public String getDate() {
 
         return date;
+    }
+    public String getPhotoUrl(){ return photoUrl;}
+//
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public void setDate(String date) {

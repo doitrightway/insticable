@@ -16,6 +16,7 @@
 package com.example.ankit.insticable;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.FractionRes;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -47,6 +49,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,55 +76,19 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener meventListener;
     private String username;
     List<String> interests=new ArrayList<>();
-    List<String> intereststags=new ArrayList<>();
     public List<events> eventsList = new ArrayList<>();
+
 //    private RecyclerView mRecyclerView;
 //    private RVAdapter adapter;
 //    private RecyclerView.LayoutManager mLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_recycle);
-//        if (student.getcount()==0) {
-//            setContentView(R.layout.activity_main);
-//        }
-//        else {
-//                        TextView t= (TextView) findViewById(R.id.t1);
-//                        if(student.getName().equals(username))
-//            setContentView(R.layout.activity_main3);
-//        }
 
-//        RecyclerView mrecycle = (RecyclerView) findViewById(R.id.rv);
-//        mrecycle.setLayoutManager(new LinearLayoutManager(this));
-
-//        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-//
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
-//
-//        // use a linear layout manager
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-//        mAdapter = new MyAdapter(myDataset);
-//        mRecyclerView.setAdapter(mAdapter);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("users");
         meventReference = mFirebaseDatabase.getReference().child("events");
-//        events event1 = new events("jnnjn","jnon","gurgaon","hello","cricket");
-//        events event2 = new events("jnjnj","4:5","gurgaon","hello","football");
-//        events event3 = new events("jnjjnj","4:5","gurgaon","hello","tennis");
-//        eventsList.add(event1);
-//        eventsList.add(event2);
-//        eventsList.add(event3);
-//        adapter = new RVAdapter(eventsList);
-//        mRecyclerView.setAdapter(adapter);
-//            GestureActivity myactivity = new GestureActivity();
-//            myactivity.organizer(eventsList, student);
-//        setContentView(R.layout.activity_recycle);
 
 
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -168,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == RC_SIGN_IN){
             if(resultCode == RESULT_OK){
-                Toast.makeText(this,"Signed in!" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"Signed in!" , Toast.LENGTH_SHORT).show();
             }else if(resultCode==RESULT_CANCELED){
-                Toast.makeText(this,"Sign in cancelled!" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"Sign in cancelled!" , Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -271,12 +240,6 @@ public class MainActivity extends AppCompatActivity {
             interests.add("squash");
         } else {
             interests.remove("squash");
-
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            //mRecyclerView.setHasFixedSize(true);
-
-            // use a linear layout manager
         }
     }
     public void swimming(View view){
@@ -329,13 +292,15 @@ public class MainActivity extends AppCompatActivity {
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
         //display();
-        calllistener();
+        //calllistener();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+//        setContentView(R.layout.activity_main2);
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+
     }
 
     @Override
@@ -355,28 +320,18 @@ public class MainActivity extends AppCompatActivity {
         meventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
                 events eventobtained = dataSnapshot.getValue(events.class);
                 event=eventobtained;
-                //assert event != null;
-                //Toast.makeText(getApplicationContext(),"second" , Toast.LENGTH_SHORT).show();
                 List<String> interestsobtained=event.getInterests();
-//                for(int i=0;i<interests.size();i++){
-//                    if(interests.get(i).equals(eventtag)){
-//                        eventsList.add(event);
-//                    }
-//                }
-//                Toast.makeText(getApplicationContext(),"buffalo" , Toast.LENGTH_SHORT).show();
-                for(int i=0;i<interestsobtained.size();i++) {
+
+               for(int i=0;i<interestsobtained.size();i++) {
                     if (interests.contains(interestsobtained.get(i))) {
                         //Toast.makeText(getApplicationContext(), "event", Toast.LENGTH_SHORT).show();
                         eventsList.add(event);
                         break;
                     }
                 }
-                Toast.makeText(getApplicationContext(), "beforedisplayfinal", Toast.LENGTH_SHORT).show();
                 display_final(eventsList);
-                Toast.makeText(getApplicationContext(), "afterdisplayfinal", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -393,61 +348,18 @@ public class MainActivity extends AppCompatActivity {
         };
         //Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
         meventReference.addChildEventListener(meventListener);
-        Toast.makeText(getApplicationContext(), "aftelistener", Toast.LENGTH_SHORT).show();
-        //display_final(eventsList);
-//        if(student.gettype().equals("student")) {
-//            Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
-//            RecyclerView mRecyclerView;
-//            RVAdapter adapter;
-//            RecyclerView.LayoutManager mLayoutManager;
-//            setContentView(R.layout.activity_recycle);
-//            mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-//
-//            // use this setting to improve performance if you know that changes
-//            // in content do not change the layout size of the RecyclerView
-//            //mRecyclerView.setHasFixedSize(true);
-//
-//            // use a linear layout manager
-//            mLayoutManager = new LinearLayoutManager(this);
-//            mRecyclerView.setLayoutManager(mLayoutManager);
-//            adapter = new RVAdapter(eventsList);
-//            mRecyclerView.setAdapter(adapter);
-//
-//            //         mRecyclerView.setAdapter(adapter);
-////            RVAdapter adapter = new RVAdapter(eventsList);
-////            rv.setAdapter(adapter);
-//////            GestureActivity myactivity = new GestureActivity();
-//////            myactivity.organizer(eventsList, student);
-//
-//
-//
-//
-//        }
-//        else if(student.gettype().equals("coordinator")){
-//            RecyclerView mRecyclerView;
-//            RVadapter_co adapter;
-//            RecyclerView.LayoutManager mLayoutManager;
-////            GesturecoActivity myactivity = new GesturecoActivity();
-////            myactivity.organizer(eventsList, student);
-//            //setContentView(R.layout.activity_gesture);
-//            setContentView(R.layout.activity_recycle_co);
-//            mRecyclerView = (RecyclerView) findViewById(R.id.rv_co);
-//
-//            // use this setting to improve performance if you know that changes
-//            // in content do not change the layout size of the RecyclerView
-//            //mRecyclerView.setHasFixedSize(true);
-//
-//            // use a linear layout manager
-//            mLayoutManager = new LinearLayoutManager(this);
-//            mRecyclerView.setLayoutManager(mLayoutManager);
-//            adapter = new RVadapter_co(eventsList);
-//            mRecyclerView.setAdapter(adapter);
-//        }
+
+//        added at 13/10/17
+
+//        display_final(eventsList);
+
+
+
+
     }
 
     public void display_final(List<events> eventsList){
         if(student.gettype().equals("student")) {
-            //Toast.makeText(getApplicationContext(),"hello" , Toast.LENGTH_SHORT).show();
             RecyclerView mRecyclerView;
             RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
@@ -455,174 +367,50 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView = (RecyclerView) findViewById(R.id.rv);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            adapter = new RVAdapter(eventsList);
+            adapter = new RVAdapter(eventsList,MainActivity.this);
             mRecyclerView.setAdapter(adapter);
-
-            //         mRecyclerView.setAdapter(adapter);
-//            RVAdapter adapter = new RVAdapter(eventsList);
-//            rv.setAdapter(adapter);
-////            GestureActivity myactivity = new GestureActivity();
-////            myactivity.organizer(eventsList, student);
-
-
-
 
         }
         else if(student.gettype().equals("coordinator")){
             RecyclerView mRecyclerView;
-            RVadapter_co adapter;
+
+//          Code changed on 13/10/17
+
+            RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
-//            GesturecoActivity myactivity = new GesturecoActivity();
-//            myactivity.organizer(eventsList, student);
-            //setContentView(R.layout.activity_gesture);
             setContentView(R.layout.activity_recycle_co);
             mRecyclerView = (RecyclerView) findViewById(R.id.rv_co);
-
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            //mRecyclerView.setHasFixedSize(true);
-
-            // use a linear layout manager
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            adapter = new RVadapter_co(eventsList);
+            adapter = new RVAdapter(eventsList,MainActivity.this);
             mRecyclerView.setAdapter(adapter);
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener()
-            {
-
-                @Override
+            {  @Override
                 public void onClick(View v) {
-                    setContentView(R.layout.activity_main_cre);
+                    Intent intent =new Intent(MainActivity.this, Create_event.class);
+                    startActivity(intent);
                 }
             });
         }
     }
 
-//    public void createevent(View view){
-//        setContentView(R.layout.activity_main_cre);
-//
-//    }
 
-    public void cricket_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("cricket");
-        }
-        else{
-            intereststags.remove("cricket");
-        }
-    }
 
-    public void football_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("football");
-        }
-        else{
-            intereststags.remove("football");
-        }
-    }
 
-    public void tennis_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("tennis");
-        }
-        else{
-            intereststags.remove("tennis");
-        }
-    }
-
-    public void squash_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("squash");
-        }
-        else{
-            intereststags.remove("squash");
-        }
-    }
-    public void swimming_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("swimming");
-        }
-        else{
-            intereststags.remove("swimming");
-        }
-    }
-
-    public void carrom_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("carrom");
-        }
-        else{
-            intereststags.remove("carrom");
-        }
-    }
-
-    public void chess_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("chess");
-        }
-        else{
-            intereststags.remove("chess");
-        }
-    }
-
-    public void music_cre(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            intereststags.add("music");
-        }
-        else{
-            intereststags.remove("music");
-        }
-    }
-
-    public void push_cre(View view){
-        EditText name=(EditText) findViewById(R.id.namecre);
-        EditText date = (EditText) findViewById(R.id.datecre);
-        EditText venue = (EditText) findViewById(R.id.venuecre);
-        EditText time = (EditText) findViewById(R.id.timecre);
-        EditText description = (EditText) findViewById(R.id.descriptioncre);
-        events event = new events();
-        event.setName(name.getText().toString());
-        event.setDate(date.getText().toString());
-        event.setTime(time.getText().toString());
-        event.setVenue(venue.getText().toString());
-        event.setDescription(description.getText().toString());
-        event.setInterests(intereststags);
-        meventReference.push().setValue(event);
-        eventsList=new ArrayList<>();
-        display();
-    }
 
     private void calllistener() {
-//        if(mChildEventListener==null) {
+
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
                     assert studentobtained != null;
                     if ((studentobtained.getName()).equals(username)) {
-                        //Toast.makeText(getApplicationContext(),"student" , Toast.LENGTH_SHORT).show();
                         student = studentobtained;
                         if(student.getcount()==1) {
                             display();
-//                        display_final(eventsList);
-                            Toast.makeText(getApplicationContext(), "aftedisplay", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 }
@@ -644,7 +432,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
-            //Toast.makeText(getApplicationContext(),"stupid" , Toast.LENGTH_SHORT).show();
+
 
 //        }
     }
@@ -656,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
             meventListener=null;
             student=new instistudent();
             interests=new ArrayList<>();
-            intereststags=new ArrayList<>();
+//            intereststags=new ArrayList<>();
             event=new events();
             eventsList=new ArrayList<>();
         }
