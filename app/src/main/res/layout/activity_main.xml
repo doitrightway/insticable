@@ -1,155 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/container"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.example.ankit.insticable.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/who"
+    android:orientation="vertical"
+    android:theme="@android:style/Theme.Translucent"
+    android:weightSum="1"
+    tools:context="com.example.ankit.insticable.MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/content"
+    <!--<android.support.design.widget.BottomNavigationView-->
+    <!--android:id="@+id/navigation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="?android:attr/windowBackground"-->
+    <!--app:menu="@menu/navigation" />-->
+    <!--<com.gigamole.navigationtabstrip.NavigationTabStrip-->
+    <!--android:id="@+id/Ntse"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--app:nts_active_color="@android:color/darker_gray"-->
+    <!--app:nts_animation_duration="300"-->
+    <!--app:nts_color="@color/colorAccent"-->
+    <!--app:nts_corners_radius="1.5dp"-->
+    <!--app:nts_factor="2.5"-->
+    <!--app:nts_gravity="top"-->
+    <!--app:nts_inactive_color="@android:color/secondary_text_light"-->
+    <!--app:nts_size="15sp"-->
+    <!--app:nts_titles="@array/titles"-->
+    <!--app:nts_type="point"-->
+    <!--app:nts_weight="3dp" />-->
+
+
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="218dp"
+        app:srcCompat="@drawable/quote" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
-            android:text="And you are?"
-            android:textAlignment="center"
-            android:textSize="35sp" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <CheckBox
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                app:srcCompat="@drawable/whoam"/>
+            <android.support.v7.widget.AppCompatCheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="coordinator"
+                android:text="Co-ordinator"
+                android:textSize="40dp"
                 android:id="@+id/cordi"
-                android:text="Coordinator"
-                android:layout_marginLeft="35dp"
-                android:textSize="20sp" />
-
-            <CheckBox
+                android:textAlignment="center"/>
+            <android.support.v7.widget.AppCompatCheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/stu"
-                android:onClick="student"
                 android:text="Student"
-                android:textSize="20sp" />
+                android:textSize="40dp"
+                android:textAlignment="center"
+                android:id="@+id/stu"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                app:srcCompat="@drawable/home"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Hostel?"
+                android:textSize="40dp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:paddingTop="10dp"/>
+            />
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="30dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAlignment="center"
+                android:id="@+id/Hostel1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Degree?"
+                android:textSize="40dp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:paddingTop="10dp"/>
+            />
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="30dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAlignment="center"
+                android:id="@+id/Degree1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Branch?"
+                android:textSize="40dp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:paddingTop="10dp"/>
+            />
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="30dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAlignment="center"
+                android:id="@+id/Dept1"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go!"
+                android:layout_marginTop="30dp"
+                android:paddingTop="10dp"
+                android:onClick="continue1"/>
+
         </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/UsernameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="12dp"
-            android:hint="Your hostel"
-            android:textColorHint="@color/colorPrimary">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Hostel1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"></android.support.design.widget.TextInputEditText>
-
-            <!--<Spinner-->
-            <!--android:id="@+id/spinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Degree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="12dp"
-            android:hint="Your degree"
-            android:textColorHint="@color/colorPrimary">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Degree1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"></android.support.design.widget.TextInputEditText>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Dept"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="12dp"
-            android:hint="Dept."
-            android:textAlignment="center"
-            android:textColorHint="@color/colorPrimary">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Dept1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"></android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
-
-
-    </LinearLayout>
-
-    <Button
-    android:id="@+id/continue1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_weight="0"
-    android:background="@color/colorPrimaryDark"
-    android:onClick="continue1"
-    android:text="Continue"
-    android:textAlignment="center"
-    android:textAllCaps="false"
-    android:textColor="@android:color/white"
-    android:textSize="16sp" />
-
-<!--<android.support.design.widget.BottomNavigationView-->
-<!--android:id="@+id/navigation"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_gravity="bottom"-->
-<!--android:background="?android:attr/windowBackground"-->
-<!--app:menu="@menu/navigation" />-->
-<!--<com.gigamole.navigationtabstrip.NavigationTabStrip-->
-<!--android:id="@+id/Ntse"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="50dp"-->
-<!--android:layout_alignParentStart="true"-->
-<!--app:nts_active_color="@android:color/darker_gray"-->
-<!--app:nts_animation_duration="300"-->
-<!--app:nts_color="@color/colorAccent"-->
-<!--app:nts_corners_radius="1.5dp"-->
-<!--app:nts_factor="2.5"-->
-<!--app:nts_gravity="top"-->
-<!--app:nts_inactive_color="@android:color/secondary_text_light"-->
-<!--app:nts_size="15sp"-->
-<!--app:nts_titles="@array/titles"-->
-<!--app:nts_type="point"-->
-<!--app:nts_weight="3dp" />-->
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
