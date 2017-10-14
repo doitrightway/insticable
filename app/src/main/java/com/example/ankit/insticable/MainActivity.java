@@ -55,6 +55,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -314,6 +315,11 @@ public class MainActivity extends AppCompatActivity {
 //        student=null;
         deletelistener();
     }
+    public List<events> reverse(List<events> listp)
+    {
+        Collections.reverse(listp);
+        return listp;
+    }
     public void display(){
 
         final List<String> interests = student.getinterests();
@@ -333,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                display_final(eventsList);
+                display_final(reverse(eventsList));
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
