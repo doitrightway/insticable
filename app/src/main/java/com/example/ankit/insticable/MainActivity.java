@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private String username;
     List<String> interests=new ArrayList<>();
     public List<events> eventsList = new ArrayList<>();
-
+// to see if checkout works
 //    private RecyclerView mRecyclerView;
 //    private RVAdapter adapter;
 //    private RecyclerView.LayoutManager mLayoutManager;
