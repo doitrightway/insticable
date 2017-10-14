@@ -4,10 +4,11 @@
 
 package com.example.ankit.insticable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class instistudent {
+public class instistudent implements Serializable {
 
     private String name;
     private String Hostel;

@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
     }
 
+
     public void cricket(View view){
             //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -400,10 +401,18 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+
+
         }
     }
 
 
+    public void chat(View view){
+        Intent intent =new Intent(MainActivity.this, page1.class);
+        intent.putExtra("mystudent",student);
+        startActivity(intent);
+    }
 
 
 
