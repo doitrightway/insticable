@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/insticable.iml" filepath="$PROJECT_DIR$/insticable.iml" />
       <module fileurl="file://$PROJECT_DIR$/insticable.iml" filepath="$PROJECT_DIR$/insticable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insticablefinal.iml" filepath="$PROJECT_DIR$/insticablefinal.iml" />
     </modules>
   </component>
 </project>
