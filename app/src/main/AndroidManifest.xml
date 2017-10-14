@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Create_event"></activity>
+        <activity android:name=".page1"></activity>
     </application>
 
 </manifest>
