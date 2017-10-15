@@ -1,17 +1,25 @@
 package com.example.ankit.insticable;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,10 +29,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
 
 public class Create_event extends Activity {
 
@@ -37,6 +49,10 @@ public class Create_event extends Activity {
     private String addedimageUrl = new String();
     private ImageView imageevent;
     private Uri selectedImageUri;
+    private TextInputEditText mDateinput;
+    private TextInputEditText mTimeinput;
+    private DatePickerDialog.OnDateSetListener mDateListener;
+    private TimePickerDialog.OnTimeSetListener mTimeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +63,71 @@ public class Create_event extends Activity {
         meventReference = mFirebaseDatabase.getReference().child("events");
         eventaddimage = (Button) findViewById(R.id.addimage);
         setContentView(R.layout.activity_main_cre);
-
+        mDateinput = (TextInputEditText) findViewById(R.id.datecre);
+mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 //       initializing the uri with null string
         selectedImageUri = Uri.parse("");
         addedimageUrl = new String();
+
+
+        //    set calendar values in edit text
+        mDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month + 1;
+                String date = dayOfMonth + "/" + month + "/" + year;
+                mDateinput.setText(date);
+            }
+        };
+
+
+        mTimeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                if(((hourOfDay/12)==1)&& (hourOfDay%12)!=0) {
+                    String time =  (hourOfDay-12) + " : " + minute + " pm";
+                    mTimeinput.setText(time);
+                }
+                else if(((hourOfDay/12)==0)&& (hourOfDay%12)==0) {
+                    String time =  (hourOfDay+12) + " : " + minute + " am";
+                    mTimeinput.setText(time);
+                }
+                else if(((hourOfDay/12)==1)&& (hourOfDay%12)==0) {
+                    String time =  hourOfDay + " : " + minute + " pm";
+                    mTimeinput.setText(time);
+                }
+                else {
+                    String time =  hourOfDay + " : " + minute + " am";
+                    mTimeinput.setText(time);
+                }
+            }
+        };
+
+    }
+
+//  datepicker on clicking on date text
+    public void add_date(View v){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog= new DatePickerDialog (Create_event.this, mDateListener, year,month,day);
+        dialog.show();
+
+
+
+    }
+//    timepicker on clicking on time text
+    public void add_time(View v) {
+        Calendar cal = Calendar.getInstance();
+        int hour_x = cal.get(Calendar.HOUR_OF_DAY);
+        int min_x = cal.get(Calendar.MINUTE);
+
+        TimePickerDialog dialog = new TimePickerDialog(Create_event.this, mTimeListener, hour_x, min_x, false);
+        dialog.show();
     }
 
     @Override
@@ -58,8 +135,8 @@ public class Create_event extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 2 && resultCode == RESULT_OK) {
-            Toast.makeText(this, "PhotoAddition!", Toast.LENGTH_SHORT).show();
             selectedImageUri = data.getData();
+
 //            to dislay image in create event page
             InputStream inputstream;
             try {
@@ -88,6 +165,7 @@ public class Create_event extends Activity {
     private void deletelistener() {
 
     }
+
 
     public void add_image(View view) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -177,11 +255,11 @@ public class Create_event extends Activity {
 
 
     public void push_cre(View view) {
-        EditText name = (EditText) findViewById(R.id.namecre);
-        EditText date = (EditText) findViewById(R.id.datecre);
-        EditText venue = (EditText) findViewById(R.id.venuecre);
-        EditText time = (EditText) findViewById(R.id.timecre);
-        EditText description = (EditText) findViewById(R.id.descriptioncre);
+        TextInputEditText name = (TextInputEditText) findViewById(R.id.namecre);
+        TextInputEditText date = (TextInputEditText) findViewById(R.id.datecre);
+        TextInputEditText venue = (TextInputEditText) findViewById(R.id.venuecre);
+        TextInputEditText time = (TextInputEditText) findViewById(R.id.timecre);
+        TextInputEditText description = (TextInputEditText) findViewById(R.id.descriptioncre);
         final events event = new events();
         event.setName(name.getText().toString());
         event.setDate(date.getText().toString());
