@@ -49,6 +49,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,9 +62,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-//    private static final String TAG = "MainActivity";
-//    public static final String ANONYMOUS = "anonymous";
-//    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     FloatingActionButton fab;
     public static final int RC_SIGN_IN = 1;
     instistudent student = new instistudent();
@@ -76,20 +74,15 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference meventReference;
     private ChildEventListener meventListener;
     private String username;
-    List<String> interests=new ArrayList<>();
     public List<events> eventsList = new ArrayList<>();
-// to see if checkout works
-//    private RecyclerView mRecyclerView;
-//    private RVAdapter adapter;
-//    private RecyclerView.LayoutManager mLayoutManager;
+    int state=0;
+    int check=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-// just to make the things commit work
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("users");
+//        mDatabaseReference = mFirebaseDatabase.getReference().child("users");
         meventReference = mFirebaseDatabase.getReference().child("events");
 
 
@@ -99,22 +92,61 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    username = user.getDisplayName();
-                    calllistener();
-                    if (student.getcount()==0) {
-                        setContentView(R.layout.activity_main);
+                    if(state==0) {
+                        username = user.getDisplayName();
+                        student.setName(username);
+                        mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(username);
+
+                        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                if (snapshot.getValue() != null) {
+                                    //user exists, do something
+                                    Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
+                                    calllistener();
+
+                                } else {
+                                    //user does not exist, do something else
+                                    Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                                    intent.putExtra("mystudent", student);
+                                    startActivity(intent);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError arg0) {
+                            }
+                        });
+
+
+//                        mDatabaseReference.addChildEventListener(mChildEventListener);
+                        //mDatabaseReference.push().setValue(student);
+                        Toast.makeText(getApplicationContext(), "Signed in!", Toast.LENGTH_SHORT).show();
+                        //calllistener();
+                        //Toast.makeText(getApplicationContext(), "Signed paagal!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Signed merge!", Toast.LENGTH_SHORT).show();
+                        //display();
                     }
+//                    if (student.getcount()==0) {
+//                        Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
+//                        Intent intent =new Intent(MainActivity.this, Main2Activity.class);
+//                        intent.putExtra("mystudent",student);
+//                        startActivity(intent);
+//                        state=1;
+//                    }
                 }
                 else {
                     deletelistener();
                     startActivityForResult(
-                            // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance().createSignInIntentBuilder().build(),
                             RC_SIGN_IN);
                 }
             }
         };
+
     }
+
+
 
 
     @Override
@@ -139,173 +171,19 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == RC_SIGN_IN){
             if(resultCode == RESULT_OK){
-//                Toast.makeText(this,"Signed in!" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Signed in!" , Toast.LENGTH_SHORT).show();
             }else if(resultCode==RESULT_CANCELED){
-//                Toast.makeText(this,"Sign in cancelled!" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Sign in cancelled!" , Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
     }
 
-//
-    public void coordinator(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            student.settype("coordinator");        }
-        else{
-            student.settype("");        }
-    }
-
-    public void student(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            student.settype("student");        }
-        else{
-            student.settype("");
-        }
-    }
-
-//    public void coordinator(View view){
-//        student.settype("coordinator");
-//        //setContentView(R.layout.activity_main2);
-//        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
-//    }
-//
-//    public void student(View view){
-//        student.settype("student");
-////        String usename= Fire;
-//        //setContentView(R.layout.activity_main2);
-//        //startActivity(new Intent(MainActivity.this, Main2Activity.class));
-//    }
-    public void continue1(View view){
-//        student.setDepartment
-        EditText dept= (EditText) findViewById(R.id.Dept1);
-        String dept1= (dept.getText()).toString();
-        student.setDepartment(dept1);
-        EditText hostel= (EditText) findViewById(R.id.Hostel1);
-        String hostel1= (hostel.getText()).toString();
-        student.setHostel(hostel1);
-        EditText degree= (EditText) findViewById(R.id.Degree1);
-        String degree1= (degree.getText()).toString();
-        student.setHostel(degree1);
-        CheckBox cordi=(CheckBox) findViewById(R.id.cordi);
-        CheckBox stu=(CheckBox) findViewById(R.id.stu);
-        if(cordi.isChecked())
-        {
-            student.settype("coordinator");
-        }
-        else {
-            student.settype("student");
-        }
-        setContentView(R.layout.activity_main3);
-    }
-
-
-    public void cricket(View view){
-            //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("cricket");
-        }
-        else{
-            interests.remove("cricket");
-        }
-    }
-
-    public void football(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("football");
-        }
-        else{
-            interests.remove("football");
-        }
-    }
-
-//    change to make a new commit
-
-    public void tennis(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("tennis");
-        }
-        else{
-            interests.remove("tennis");
-        }
-    }
-
-    public void squash(View view) {
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if (checked) {
-            interests.add("squash");
-        } else {
-            interests.remove("squash");
-        }
-    }
-    public void swimming(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("swimming");
-        }
-        else{
-            interests.remove("swimming");
-        }
-    }
-
-    public void carrom(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("carrom");
-        }
-        else{
-            interests.remove("carrom");
-        }
-    }
-
-    public void chess(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("chess");
-        }
-        else{
-            interests.remove("chess");
-        }
-    }
-
-    public void music(View view){
-        //code to check if this checkbox is checked!
-        boolean checked = ((CheckBox) view).isChecked();
-        if(checked) {
-            interests.add("music");
-        }
-        else{
-            interests.remove("music");
-        }
-    }
-
-    public void enjoy(View view){
-        student.setinterests(interests);
-        student.setName(username);
-        student.setCount(1);
-        mDatabaseReference.push().setValue(student);
-        //display();
-        //calllistener();
-    }
 
     @Override
     protected void onResume(){
         super.onResume();
-//        setContentView(R.layout.activity_main2);
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-
     }
 
     @Override
@@ -314,29 +192,26 @@ public class MainActivity extends AppCompatActivity {
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
-//        student=null;
         deletelistener();
     }
+
     public List<events> reverse(List<events> listp)
     {
         Collections.reverse(listp);
         return listp;
     }
     public void display(){
-
         final List<String> interests = student.getinterests();
-        //Toast.makeText(getApplicationContext(),"first" , Toast.LENGTH_SHORT).show();
         eventsList=new ArrayList<>();
         meventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                events eventobtained = dataSnapshot.getValue(events.class);
-                event=eventobtained;
+                event = dataSnapshot.getValue(events.class);
+                assert event != null;
                 List<String> interestsobtained=event.getInterests();
 
                for(int i=0;i<interestsobtained.size();i++) {
                     if (interests.contains(interestsobtained.get(i))) {
-                        //Toast.makeText(getApplicationContext(), "event", Toast.LENGTH_SHORT).show();
                         eventsList.add(event);
                         break;
                     }
@@ -356,16 +231,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        //Toast.makeText(getApplicationContext(),"after" , Toast.LENGTH_SHORT).show();
         meventReference.addChildEventListener(meventListener);
-
-//        added at 13/10/17
-
-//        display_final(eventsList);
-
-
-
-
     }
 
     public void display_final(List<events> eventsList){
@@ -383,9 +249,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(student.gettype().equals("coordinator")){
             RecyclerView mRecyclerView;
-
-//          Code changed on 13/10/17
-
             RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
             setContentView(R.layout.activity_recycle_co);
@@ -402,9 +265,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
-
-
         }
     }
 
@@ -416,23 +276,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void calllistener() {
+        Toast.makeText(getApplicationContext(), "Signed info!", Toast.LENGTH_SHORT).show();
 
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
-                    assert studentobtained != null;
-                    if ((studentobtained.getName()).equals(username)) {
-                        student = studentobtained;
-                        if(student.getcount()==1) {
-                            display();
-
-                        }
+                        instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
+                        assert studentobtained != null;
+                        if ((studentobtained.getName()).equals(username)) {
+                            student = studentobtained;
+                            Toast.makeText(getApplicationContext(), "has child!", Toast.LENGTH_SHORT).show();
+                            if(student.getcount()==1) {
+                                display();
+                            }
                     }
                 }
-
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 }
@@ -450,21 +309,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             mDatabaseReference.addChildEventListener(mChildEventListener);
-
-
-//        }
     }
     private void deletelistener() {
-        if (mChildEventListener != null) {
-            mDatabaseReference.removeEventListener(mChildEventListener);
-            meventReference.removeEventListener(meventListener);
-            mChildEventListener=null;
-            meventListener=null;
-            student=new instistudent();
-            interests=new ArrayList<>();
-//            intereststags=new ArrayList<>();
-            event=new events();
-            eventsList=new ArrayList<>();
-        }
+//        if (mChildEventListener != null) {
+//            mDatabaseReference.removeEventListener(mChildEventListener);
+//            meventReference.removeEventListener(meventListener);
+//            mChildEventListener=null;
+//            meventListener=null;
+//            event=new events();
+//            eventsList=new ArrayList<>();
+//        }
     }
 }
