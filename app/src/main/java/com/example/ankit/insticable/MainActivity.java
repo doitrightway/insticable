@@ -117,23 +117,10 @@ public class MainActivity extends AppCompatActivity {
                             public void onCancelled(DatabaseError arg0) {
                             }
                         });
-
-
-//                        mDatabaseReference.addChildEventListener(mChildEventListener);
-                        //mDatabaseReference.push().setValue(student);
                         Toast.makeText(getApplicationContext(), "Signed in!", Toast.LENGTH_SHORT).show();
-                        //calllistener();
-                        //Toast.makeText(getApplicationContext(), "Signed paagal!", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getApplicationContext(), "Signed merge!", Toast.LENGTH_SHORT).show();
-                        //display();
+
                     }
-//                    if (student.getcount()==0) {
-//                        Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
-//                        Intent intent =new Intent(MainActivity.this, Main2Activity.class);
-//                        intent.putExtra("mystudent",student);
-//                        startActivity(intent);
-//                        state=1;
-//                    }
+
                 }
                 else {
                     deletelistener();
