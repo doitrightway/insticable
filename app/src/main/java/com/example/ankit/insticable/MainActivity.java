@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                                     intent.putExtra("mystudent", student);
                                     startActivity(intent);
-                                    finish();
                                 }
                             }
                             @Override
