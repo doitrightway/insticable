@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        mDatabaseReference = mFirebaseDatabase.getReference().child("users");
         meventReference = mFirebaseDatabase.getReference().child("events");
 
 
