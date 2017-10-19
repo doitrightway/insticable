@@ -102,16 +102,15 @@ public class MainActivity extends AppCompatActivity {
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.getValue() != null) {
                                     //user exists, do something
-                                    Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
                                     calllistener();
 
                                 } else {
                                     //user does not exist, do something else
-                                    Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "Signed out!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                                     intent.putExtra("mystudent", student);
                                     startActivity(intent);
-                                    finish();
                                 }
                             }
                             @Override
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                        mDatabaseReference.addChildEventListener(mChildEventListener);
                         //mDatabaseReference.push().setValue(student);
-                        Toast.makeText(getApplicationContext(), "Signed in!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Signed in!", Toast.LENGTH_SHORT).show();
                         //calllistener();
                         //Toast.makeText(getApplicationContext(), "Signed paagal!", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getApplicationContext(), "Signed merge!", Toast.LENGTH_SHORT).show();
@@ -278,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void calllistener() {
-        Toast.makeText(getApplicationContext(), "Signed info!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Signed info!", Toast.LENGTH_SHORT).show();
 
             mChildEventListener = new ChildEventListener() {
                 @Override
@@ -287,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
                         assert studentobtained != null;
                         if ((studentobtained.getName()).equals(username)) {
                             student = studentobtained;
-                            Toast.makeText(getApplicationContext(), "has child!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "has child!", Toast.LENGTH_SHORT).show();
                             if(student.getcount()==1) {
                                 display();
                             }

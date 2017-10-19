@@ -29,6 +29,5 @@ public class page1 extends AppCompatActivity {
             startActivity(intent);
         }
         });
-
     }
 }

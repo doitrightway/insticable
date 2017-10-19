@@ -80,6 +80,12 @@ public class chat_interface extends AppCompatActivity {
         {
             mDatabaseReference = mFirebaseDatabase.getReference().child("groupchat").child("hostel").child(hostel).child("Department").child(department).child("Degree").child(degree);
         }
+        else if(param==4)
+        {
+            String imp= (String) intent.getExtras().getString("unique");
+            mDatabaseReference = mFirebaseDatabase.getReference().child("groupchat").child("hostel").child(hostel).child("Department").child(department).child("Degree").
+                    child(degree).child("interests").child(imp);
+        }
 
 
 

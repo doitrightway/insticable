@@ -29,7 +29,7 @@ public class page3 extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener()
         {  @Override
         public void onClick(View v) {
-            Intent intent =new Intent(page3.this, page4.class);
+            Intent intent =new Intent(page3.this, page5.class);
             intent.putExtra("mystudent",mystudent);
             startActivity(intent);
         }
