@@ -10,6 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Group Chat"
+    android:background="@android:color/white"
     android:onClick="chat"/>
 <android.support.v7.widget.RecyclerView
     android:id="@+id/rv"
