@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Degree_choices">
+        <item>Btech</item>
+        <item>Mtech</item>
+        <item>Phd</item>
+    </string-array>
+    <string-array name="Branch_choices">
+        <item>CSE</item>
+        <item>EE</item>
+        <item>Mech</item>
+        <item>Chem</item>
+    </string-array>
+
+</resources>

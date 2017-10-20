@@ -4,18 +4,49 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity{
     instistudent student= new instistudent();
+    String degreestring;
+    Spinner degreesp;
+    Spinner deptsp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+
+
+       degreesp = (Spinner)findViewById(R.id.degreespinner);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.Degree_choices, android.R.layout.simple_gallery_item);
+// Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.select_dialog_item);
+// Apply the adapter to the spinner
+        degreesp.setAdapter(adapter1);
+//        degreesp.setOnItemSelectedListener(this);
+
+
+        deptsp = (Spinner)findViewById(R.id.branchspinner);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.Branch_choices, android.R.layout.simple_gallery_item);
+// Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.select_dialog_item);
+// Apply the adapter to the spinner
+        deptsp.setAdapter(adapter2);
+
+
+
         Intent intent = getIntent();
         student= (instistudent) intent.getExtras().getSerializable("mystudent");
     }
@@ -39,14 +70,14 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
     public void continue1(View view){
-        EditText dept= (EditText) findViewById(R.id.Dept1);
-        String dept1= (dept.getText()).toString();
+//        EditText dept= (EditText) findViewById(R.id.Dept1);
+        String dept1= (deptsp.getSelectedItem()).toString();
         student.setDepartment(dept1);
         EditText hostel= (EditText) findViewById(R.id.Hostel1);
         String hostel1= (hostel.getText()).toString();
         student.setHostel(hostel1);
-        EditText degree= (EditText) findViewById(R.id.Degree1);
-        String degree1= (degree.getText()).toString();
+//        EditText degree= (EditText) findViewById(R.id.Degree1);
+        String degree1= (degreesp.getSelectedItem()).toString();
         student.setDegree(degree1);
         CheckBox cordi=(CheckBox) findViewById(R.id.cordi);
         CheckBox stu=(CheckBox) findViewById(R.id.stu);
@@ -62,5 +93,4 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }
