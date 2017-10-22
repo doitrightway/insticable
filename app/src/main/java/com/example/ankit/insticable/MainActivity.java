@@ -162,6 +162,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 return true;
+            case R.id.group_chat_menu:
+            {Intent intent =new Intent(MainActivity.this, page1.class);
+                intent.putExtra("mystudent",student);
+                startActivity(intent);
+                return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);}
     }
@@ -269,11 +275,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void chat(View view){
-        Intent intent =new Intent(MainActivity.this, page1.class);
-        intent.putExtra("mystudent",student);
-        startActivity(intent);
-    }
+//    public void chat(View view){
+//        Intent intent =new Intent(MainActivity.this, page1.class);
+//        intent.putExtra("mystudent",student);
+//        startActivity(intent);
+//    }
 
 
     private void calllistener() {
