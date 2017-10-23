@@ -277,7 +277,7 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     addedimageUrl = downloadUrl.toString();
-                    //      saving imageurl in the event photourl child
+                    //      saving imageurl in the event photourl child.
                     event.setPhotoUrl(addedimageUrl);
 
                     meventReference.push().setValue(event);
