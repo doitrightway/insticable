@@ -21,15 +21,18 @@ import android.os.Bundle;
 import android.support.annotation.FractionRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -61,7 +64,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
+//    private GestureDetectorCompat gestureDetectorCompat;
     FloatingActionButton fab;
     public static final int RC_SIGN_IN = 1;
     instistudent student = new instistudent();
@@ -146,7 +149,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+//    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+//        //handle 'swipe left' action only
+//
+//        @Override
+//        public boolean onFling(MotionEvent event1, MotionEvent event2,
+//                               float velocityX, float velocityY) {
+//
+//         /*
+//         Toast.makeText(getBaseContext(),
+//          event1.toString() + "\n\n" +event2.toString(),
+//          Toast.LENGTH_SHORT).show();
+//         */
+//
+//            if(event2.getX() < event1.getX()){
+//                Toast.makeText(getBaseContext(),
+//                        "Swipe left - startActivity()",
+//                        Toast.LENGTH_SHORT).show();
+//
+//                //switch another activity
+//                Intent intent = new Intent(
+//                        MainActivity.this, page1.class);
+//                intent.putExtra("mystudent",student);
+//                startActivity(intent);
+//            }
+//
+//            return true;
+//        }
+//    }
 
 
     @Override
@@ -155,6 +185,12 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        this.gestureDetectorCompat.onTouchEvent(event);
+//        return super.onTouchEvent(event);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -246,6 +282,11 @@ public class MainActivity extends AppCompatActivity {
             RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
             setContentView(R.layout.activity_recycle);
+
+
+//            gestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+
+
             mRecyclerView = (RecyclerView) findViewById(R.id.rv);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
@@ -258,6 +299,11 @@ public class MainActivity extends AppCompatActivity {
             RVAdapter adapter;
             RecyclerView.LayoutManager mLayoutManager;
             setContentView(R.layout.activity_recycle_co);
+
+
+//            gestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+
+
             mRecyclerView = (RecyclerView) findViewById(R.id.rv_co);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
