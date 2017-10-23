@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class Create_event extends Activity {
     private StorageReference mChatPhotoStorageReferrence;
     private DatabaseReference meventReference;
     private FirebaseDatabase mFirebaseDatabase;
+    private ProgressBar mProgressBar;
     private Button eventaddimage;
     private String addedimageUrl = new String();
     private ImageView imageevent;
@@ -104,6 +106,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
                 }
             }
         };
+
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        // Initialize progress bar
+        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
     }
 
@@ -255,6 +262,8 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 
 
     public void push_cre(View view) {
+        // Initialize progress bar
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         TextInputEditText name = (TextInputEditText) findViewById(R.id.namecre);
         TextInputEditText date = (TextInputEditText) findViewById(R.id.datecre);
         TextInputEditText venue = (TextInputEditText) findViewById(R.id.venuecre);
