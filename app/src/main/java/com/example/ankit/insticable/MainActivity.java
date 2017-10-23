@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference meventReference;
     private ChildEventListener meventListener;
     private String username;
+    private String mystring;
     public List<events> eventsList = new ArrayList<>();
     int state=0;
     int check=0;
@@ -203,6 +204,17 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("mystudent",student);
                 startActivity(intent);
                 return true;
+
+            }
+            case R.id.setting_menu:
+            {
+                {Intent intent =new Intent(MainActivity.this, settings.class);
+                    intent.putExtra("mystudent",student);
+                    intent.putExtra("key",mystring);
+                    startActivity(intent);
+                    return true;
+
+                }
             }
             default:
                 return super.onOptionsItemSelected(item);}
@@ -335,6 +347,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         instistudent studentobtained = dataSnapshot.getValue(instistudent.class);
+                        mystring=dataSnapshot.getKey();
                         assert studentobtained != null;
                         if ((studentobtained.getName()).equals(username)) {
                             student = studentobtained;
