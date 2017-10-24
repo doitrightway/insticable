@@ -20,7 +20,7 @@ public class page1 extends AppCompatActivity {
         mystudent= (instistudent) intent.getExtras().getSerializable("mystudent");
         Button button = (Button) findViewById(R.id.first);
         String hostel=mystudent.getHostel();
-        button.setText(hostel);
+        button.setText("Hostel "+hostel);
         button.setOnClickListener(new View.OnClickListener()
         {  @Override
         public void onClick(View v) {
