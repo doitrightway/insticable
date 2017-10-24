@@ -18,59 +18,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@android:color/white"
-            >
+            android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/image1"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused"
-            android:layout_weight="0.18"
             android:layout_marginTop="20dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/logo3">
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
-            android:layout_weight="0.18"
+            android:layout_weight="0.15"
             android:text="Name"
             android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.18"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
             android:text="Date"
             android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.18"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
             android:text="Time"
             android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/venue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.18"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
             android:text="Venue"
             android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/despe"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
                 android:text="Description"
                 android:textAlignment="center"/>
+        </LinearLayout>
 
         <!--<Button-->
             <!--android:id="@+id/getinfo"-->

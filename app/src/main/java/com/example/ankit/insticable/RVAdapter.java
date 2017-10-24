@@ -83,9 +83,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
         YoYo.with(Techniques.FlipInY).playOn(personViewHolder.cv);
         personViewHolder.name.setText(eventsList.get(i).getName());
-        personViewHolder.date.setText(eventsList.get(i).getDate());
-        personViewHolder.time.setText(eventsList.get(i).getTime());
-        personViewHolder.venue.setText(eventsList.get(i).getVenue());
+        personViewHolder.date.setText("Date : " + eventsList.get(i).getDate());
+        personViewHolder.time.setText("Time : " + eventsList.get(i).getTime());
+        personViewHolder.venue.setText("Venue : " + eventsList.get(i).getVenue());
         personViewHolder.description.setText(eventsList.get(i).getDescription());
         String imageurl = eventsList.get(i).getPhotoUrl();
        Glide.with(context).load(imageurl).into((ImageView) personViewHolder.getImage());
