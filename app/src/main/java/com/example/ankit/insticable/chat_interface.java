@@ -215,8 +215,10 @@ public class chat_interface extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    MessageInstance friendlyMessage = dataSnapshot.getValue(MessageInstance.class);
-                    mMessageAdapter.add(friendlyMessage);
+                    if(!(dataSnapshot.getKey().equals("Degree") || dataSnapshot.getKey().equals("Department") || dataSnapshot.getKey().equals("interests"))) {
+                        MessageInstance friendlyMessage = dataSnapshot.getValue(MessageInstance.class);
+                        mMessageAdapter.add(friendlyMessage);
+                    }
                 }
 
                 @Override
