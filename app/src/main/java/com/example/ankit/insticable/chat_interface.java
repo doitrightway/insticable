@@ -100,6 +100,24 @@ public class chat_interface extends AppCompatActivity {
             mChatPhotosStorageReference = mFirebaseStorage.getReference().child("groupchat").child("hostel").child(hostel).child("Department").child(department).child("Degree").
                     child(degree).child("interests").child(imp);
         }
+        else if(param==-1)
+        {
+            mChatPhotosStorageReference = mFirebaseStorage.getReference().child("groupchat").child("Department").child(department);
+            mDatabaseReference = mFirebaseDatabase.getReference().child("groupchat").child("Department").child(department);
+        }
+        else if(param==-2)
+        {
+            mChatPhotosStorageReference = mFirebaseStorage.getReference().child("groupchat").child("Department").child(department).child("Degree").child(degree);
+            mDatabaseReference = mFirebaseDatabase.getReference().child("groupchat").child("Department").child(department).child("Degree").child(degree);
+        }
+        else if(param==-3)
+        {
+            String imp= (String) intent.getExtras().getString("unique");
+            mDatabaseReference = mFirebaseDatabase.getReference().child("groupchat").child("Department").child(department).child("Degree").
+                    child(degree).child("interests").child(imp);
+            mChatPhotosStorageReference = mFirebaseStorage.getReference().child("groupchat").child("Department").child(department).child("Degree").
+                    child(degree).child("interests").child(imp);
+        }
 
 
 
