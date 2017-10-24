@@ -12,6 +12,7 @@ import android.widget.Button;
 
 public class page2 extends AppCompatActivity {
     instistudent mystudent=new instistudent();
+    //edge
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page2);

@@ -87,4 +87,4 @@
     </android.support.v7.widget.CardView>
 
 <!--</LinearLayout>-->
-    <!--app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused"-->
+    <!--app:srcCompat="@dawable/common_google_signin_btn_icon_dark_focused"-->
