@@ -25,20 +25,42 @@ import java.util.List;
 /**
  * Created by ankit on 18/10/17.
  */
-
 public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent;
+    /**
+     * The Context.
+     */
     Context context;
 
+    /**
+     * Instantiates a new Myadapter.
+     *
+     * @param student the student
+     * @param context the context
+     */
     public Myadapter(instistudent student, Context context) {
         this.mystudent = student;
         this.context = context;
     }
 
 
+    /**
+     * The type My view holder.
+     */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The Mybutton.
+         */
         Button mybutton;
 
+        /**
+         * Instantiates a new My view holder.
+         *
+         * @param itemView the item view
+         */
         MyViewHolder(View itemView) {
             super(itemView);
             mybutton = (Button) itemView.findViewById(R.id.mybutton);

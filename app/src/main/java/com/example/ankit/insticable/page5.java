@@ -9,7 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * The type Page 5.
+ */
 public class page5 extends AppCompatActivity {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent=new instistudent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

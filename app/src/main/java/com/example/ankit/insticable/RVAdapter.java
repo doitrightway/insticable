@@ -29,28 +29,69 @@ import static java.security.AccessController.getContext;
 /**
  * Created by ankit on 8/10/17.
  */
-
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
+    /**
+     * The Events list.
+     */
     List<events> eventsList;
+    /**
+     * The Context.
+     */
     Context context;
+
+    /**
+     * Instantiates a new Rv adapter.
+     *
+     * @param eventsList the events list
+     * @param context    the context
+     */
     public RVAdapter(List<events> eventsList, Context context){
         this.eventsList = eventsList;
         this.context=context;
     }
 
 
-
+    /**
+     * The type Person view holder.
+     */
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The Cv.
+         */
         CardView cv;
+        /**
+         * The Name.
+         */
         TextView name;
+        /**
+         * The Date.
+         */
         TextView date;
+        /**
+         * The Image 1.
+         */
         ImageView image1;
+        /**
+         * The Time.
+         */
         TextView time;
+        /**
+         * The Venue.
+         */
         TextView venue;
 
+        /**
+         * The Description.
+         */
 //        Button btnButton1;
         TextView description;
+
+        /**
+         * Instantiates a new Person view holder.
+         *
+         * @param itemView the item view
+         */
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
@@ -61,6 +102,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
             image1 = (ImageView) itemView.findViewById(R.id.image1);
             description=(TextView)itemView.findViewById(R.id.despe);
         }
+
+        /**
+         * Get image image view.
+         *
+         * @return the image view
+         */
         public ImageView getImage(){
          return image1;
         }

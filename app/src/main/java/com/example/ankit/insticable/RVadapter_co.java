@@ -17,24 +17,61 @@ import static android.R.attr.setupActivity;
 /**
  * Created by ankit on 8/10/17.
  */
-
 public class RVadapter_co extends RecyclerView.Adapter<RVadapter_co.EventViewHolder>{
 
+    /**
+     * The Events list.
+     */
     List<events> eventsList;
 
+    /**
+     * Instantiates a new R vadapter co.
+     *
+     * @param eventsList the events list
+     */
     public RVadapter_co(List<events> eventsList){
         this.eventsList = eventsList;
     }
 
+    /**
+     * The type Event view holder.
+     */
     public static class EventViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The Cv.
+         */
         CardView cv;
+        /**
+         * The Name.
+         */
         TextView name;
+        /**
+         * The Date.
+         */
         TextView date;
+        /**
+         * The Image.
+         */
         ImageView image;
+        /**
+         * The Time.
+         */
         TextView time;
+        /**
+         * The Venue.
+         */
         TextView venue;
-        //        Button btnButton1;
+        /**
+         * The Description.
+         */
+//        Button btnButton1;
         TextView description;
+
+        /**
+         * Instantiates a new Event view holder.
+         *
+         * @param itemView the item view
+         */
         EventViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);

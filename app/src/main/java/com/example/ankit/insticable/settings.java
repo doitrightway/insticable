@@ -12,6 +12,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+/**
+ *  Activity responsible for handling settings
+ */
 public class settings extends AppCompatActivity {
     instistudent student= new instistudent();
     public List <String> interests;
@@ -92,6 +95,8 @@ public class settings extends AppCompatActivity {
             stu.setChecked(isChecked);
 
     }
+
+
     public void addcordi(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -102,6 +107,7 @@ public class settings extends AppCompatActivity {
         }
     }
 
+
     public void addstu(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -111,6 +117,8 @@ public class settings extends AppCompatActivity {
             type="";
         }
     }
+
+
     public void addcricket(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -120,6 +128,7 @@ public class settings extends AppCompatActivity {
             interests.remove("cricket");
         }
     }
+
 
     public void addfootball(View view){
         boolean checked = ((CheckBox) view).isChecked();
@@ -132,6 +141,7 @@ public class settings extends AppCompatActivity {
     }
 
 
+
     public void addtennis(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -142,6 +152,7 @@ public class settings extends AppCompatActivity {
         }
     }
 
+
     public void addsquash(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
@@ -150,6 +161,8 @@ public class settings extends AppCompatActivity {
             interests.remove("squash");
         }
     }
+
+
     public void addswimming(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -160,6 +173,7 @@ public class settings extends AppCompatActivity {
         }
     }
 
+
     public void addcarrom(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -169,6 +183,7 @@ public class settings extends AppCompatActivity {
             interests.remove("carrom");
         }
     }
+
 
     public void addchess(View view){
         boolean checked = ((CheckBox) view).isChecked();
@@ -189,6 +204,7 @@ public class settings extends AppCompatActivity {
             interests.remove("music");
         }
     }
+
     public void done(View view){
         mDatabaseReference.child(mystring).child("interests").setValue(interests);
         hostel=text1.getText().toString();

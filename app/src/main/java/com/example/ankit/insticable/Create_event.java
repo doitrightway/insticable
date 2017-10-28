@@ -39,8 +39,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 
+/**
+ *The class which handles the new event creation.
+ */
 public class Create_event extends Activity {
 
+    /**
+     * The Interests tags.
+     */
     List<String> intereststags = new ArrayList<>();
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mChatPhotoStorageReferrence;
@@ -114,6 +120,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 
     }
 
+    /**
+     * Add date.
+     *
+     * @param v the view present
+     */
 //  datepicker on clicking on date text
     public void add_date(View v){
         Calendar cal = Calendar.getInstance();
@@ -127,6 +138,12 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 
 
     }
+
+    /**
+     * Add time.
+     *
+     * @param v the view present
+     */
 //    timepicker on clicking on time text
     public void add_time(View v) {
         Calendar cal = Calendar.getInstance();
@@ -144,7 +161,9 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         if (requestCode == 2 && resultCode == RESULT_OK) {
             selectedImageUri = data.getData();
 
-//            to dislay image in create event page
+/**          to dislay image in create event page
+ *
+ */
             InputStream inputstream;
             try {
                 inputstream = getContentResolver().openInputStream(selectedImageUri);
@@ -174,6 +193,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
     }
 
 
+    /**
+     * Add image of the event.
+     *
+     * @param view the view present
+     */
     public void add_image(View view) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
@@ -182,6 +206,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 
     }
 
+    /**
+     * Checkbox handler of cricket.
+     *
+     * @param view the the view present
+     */
     public void cricket_cre(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
@@ -191,6 +220,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of football
+     *
+     * @param view the view
+     */
     public void football_cre(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -201,6 +235,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of tennis.
+     *
+     * @param view the view
+     */
     public void tennis_cre(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -211,6 +250,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of squash
+     *
+     * @param view the view present
+     */
     public void squash_cre(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -221,6 +265,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of swimming
+     *
+     * @param view the view present
+     */
     public void swimming_cre(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -231,6 +280,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of Carrom
+     *
+     * @param view the view present
+     */
     public void carrom_cre(View view) {
         //code to check if this checkbox is checked!
         boolean checked = ((CheckBox) view).isChecked();
@@ -241,6 +295,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of Chess
+     *
+     * @param view the view present
+     */
     public void chess_cre(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
@@ -250,6 +309,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         }
     }
 
+    /**
+     * Checkbox handler of Music.
+     *
+     * @param view the view present
+     */
     public void music_cre(View view) {
 
         boolean checked = ((CheckBox) view).isChecked();
@@ -261,6 +325,11 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
     }
 
 
+    /**
+     * Saving event on database on clicking Create_Events.
+     *
+     * @param view the view present
+     */
     public void push_cre(View view) {
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
@@ -277,7 +346,9 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
         event.setDescription(description.getText().toString());
         event.setInterests(intereststags);
 
-        //  checking if image was given
+        /**  checking if image was given
+         *
+         */
         if (!(selectedImageUri.toString().equals(""))) {
             //            send image to storage
             StorageReference photoRef = mChatPhotoStorageReferrence.child(selectedImageUri.getLastPathSegment());

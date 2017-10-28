@@ -14,10 +14,25 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Main 2 activity.
+ */
 public class Main2Activity extends AppCompatActivity{
+    /**
+     * The Student.
+     */
     instistudent student= new instistudent();
+    /**
+     * The Degreestring.
+     */
     String degreestring;
+    /**
+     * The Degreesp.
+     */
     Spinner degreesp;
+    /**
+     * The Deptsp.
+     */
     Spinner deptsp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +65,12 @@ public class Main2Activity extends AppCompatActivity{
         Intent intent = getIntent();
         student= (instistudent) intent.getExtras().getSerializable("mystudent");
     }
+
+    /**
+     * Coordinator.
+     *
+     * @param view the view
+     */
     public void coordinator(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -60,6 +81,11 @@ public class Main2Activity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Student.
+     *
+     * @param view the view
+     */
     public void student(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -69,6 +95,12 @@ public class Main2Activity extends AppCompatActivity{
             student.settype("");
         }
     }
+
+    /**
+     * Continue 1.
+     *
+     * @param view the view
+     */
     public void continue1(View view){
 //        EditText dept= (EditText) findViewById(R.id.Dept1);
         String dept1= (deptsp.getSelectedItem()).toString();

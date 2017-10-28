@@ -10,8 +10,10 @@ import android.widget.Button;
 /**
  * Created by ankit on 14/10/17.
  */
-
 public class page1 extends AppCompatActivity {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent= new instistudent();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

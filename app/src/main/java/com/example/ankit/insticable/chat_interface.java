@@ -37,12 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ankit on 14/10/17.
+ * Activity responsible for handling the final chat interface.
  */
-
-public class chat_interface extends AppCompatActivity {
-
-
+public class chat_interface extends AppCompatActivity{
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;

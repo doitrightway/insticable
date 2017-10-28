@@ -15,8 +15,14 @@ import java.util.List;
 /**
  * Created by sharvik on 14/10/17.
  */
-
 public class MessageAdapter extends ArrayAdapter<MessageInstance>{
+    /**
+     * Instantiates a new Message adapter.
+     *
+     * @param context  the context
+     * @param resource the resource
+     * @param objects  the objects
+     */
     public MessageAdapter(Context context, int resource, List<MessageInstance> objects) {
         super(context, resource, objects);
     }

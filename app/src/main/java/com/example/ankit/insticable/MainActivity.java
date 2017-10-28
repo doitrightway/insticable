@@ -62,12 +62,27 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * The Fab.
+     */
 //    private GestureDetectorCompat gestureDetectorCompat;
     FloatingActionButton fab;
+    /**
+     * The constant RC_SIGN_IN.
+     */
     public static final int RC_SIGN_IN = 1;
+    /**
+     * The Student.
+     */
     instistudent student = new instistudent();
+    /**
+     * The Event.
+     */
     events event = new events();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -78,8 +93,17 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener meventListener;
     private String username;
     private String mystring;
+    /**
+     * The Events list.
+     */
     public List<events> eventsList = new ArrayList<>();
+    /**
+     * The State.
+     */
     int state=0;
+    /**
+     * The Check.
+     */
     int check=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,11 +273,21 @@ public class MainActivity extends AppCompatActivity {
         deletelistener();
     }
 
+    /**
+     * Reverse list.
+     *
+     * @param listp the listp
+     * @return the list
+     */
     public List<events> reverse(List<events> listp)
     {
         Collections.reverse(listp);
         return listp;
     }
+
+    /**
+     * Display.
+     */
     public void display(){
         final List<String> interests = student.getinterests();
         eventsList=new ArrayList<>();
@@ -288,6 +322,11 @@ public class MainActivity extends AppCompatActivity {
         meventReference.addChildEventListener(meventListener);
     }
 
+    /**
+     * Display final.
+     *
+     * @param eventsList the events list
+     */
     public void display_final(List<events> eventsList){
         if(student.gettype().equals("student")) {
             RecyclerView mRecyclerView;

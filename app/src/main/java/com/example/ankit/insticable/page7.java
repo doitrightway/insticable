@@ -8,7 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * The type Page 7.
+ */
 public class page7 extends AppCompatActivity {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent = new instistudent();
 
     @Override

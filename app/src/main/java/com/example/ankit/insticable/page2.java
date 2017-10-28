@@ -9,8 +9,10 @@ import android.widget.Button;
 /**
  * Created by ankit on 14/10/17.
  */
-
 public class page2 extends AppCompatActivity {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent=new instistudent();
     //edge
     protected void onCreate(Bundle savedInstanceState) {

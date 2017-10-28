@@ -15,12 +15,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Main 4 activity.
+ */
 public class Main4Activity extends AppCompatActivity {
+    /**
+     * The Fab.
+     */
     FloatingActionButton fab;
+    /**
+     * The Student.
+     */
     instistudent student= new instistudent();
+    /**
+     * The Event.
+     */
     events event = new events();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    /**
+     * The Interests.
+     */
     List<String> interests=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +49,11 @@ public class Main4Activity extends AppCompatActivity {
         mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(student.getName());
     }
 
+    /**
+     * Cricket.
+     *
+     * @param view the view
+     */
     public void cricket(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -44,6 +64,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Football.
+     *
+     * @param view the view
+     */
     public void football(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -55,6 +80,11 @@ public class Main4Activity extends AppCompatActivity {
     }
 
 
+    /**
+     * Tennis.
+     *
+     * @param view the view
+     */
     public void tennis(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -65,6 +95,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Squash.
+     *
+     * @param view the view
+     */
     public void squash(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
@@ -73,6 +108,12 @@ public class Main4Activity extends AppCompatActivity {
             interests.remove("squash");
         }
     }
+
+    /**
+     * Swimming.
+     *
+     * @param view the view
+     */
     public void swimming(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -83,6 +124,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Carrom.
+     *
+     * @param view the view
+     */
     public void carrom(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -93,6 +139,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Chess.
+     *
+     * @param view the view
+     */
     public void chess(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -103,6 +154,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Music.
+     *
+     * @param view the view
+     */
     public void music(View view){
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
@@ -113,6 +169,11 @@ public class Main4Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enjoy.
+     *
+     * @param view the view
+     */
     public void enjoy(View view){
         student.setinterests(interests);
         student.setCount(1);

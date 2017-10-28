@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * The type Page 6.
+ */
 public class page6 extends AppCompatActivity {
+    /**
+     * The Mystudent.
+     */
     instistudent mystudent= new instistudent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
