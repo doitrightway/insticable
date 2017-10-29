@@ -1,6 +1,7 @@
 package com.example.ankit.insticable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,15 +17,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.net.URL;
 import java.util.List;
 
-import static android.R.attr.description;
-import static android.R.attr.setupActivity;
-import static android.R.attr.targetActivity;
-import static com.example.ankit.insticable.R.id.image1;
-import static java.security.AccessController.getContext;
+import static com.example.ankit.insticable.R.id.mybutton;
+
+//import static android.R.attr.description;
+//import static android.R.attr.setupActivity;
+//import static android.R.attr.targetActivity;
+//import static com.example.ankit.insticable.R.id.button;
+//import static com.example.ankit.insticable.R.id.image1;
+//import static com.example.ankit.insticable.R.id.mybutton;
+//import static java.security.AccessController.getContext;
 
 /**
  * Created by ankit on 8/10/17.
@@ -48,9 +55,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
      * @param eventsList the events list
      * @param context    the context
      */
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
     public RVAdapter(List<events> eventsList, Context context){
         this.eventsList = eventsList;
         this.context=context;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference().child("events");
     }
 
 
@@ -91,6 +102,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 //        Button btnButton1;
         TextView description;
 
+        TextView number;
+
+        Button mybutton;
+
         /**
          * Instantiates a new Person view holder.
          * @param itemView the item view
@@ -104,6 +119,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
              venue = (TextView)itemView.findViewById(R.id.venue);
             image1 = (ImageView) itemView.findViewById(R.id.image1);
             description=(TextView)itemView.findViewById(R.id.despe);
+            number=(TextView)itemView.findViewById(R.id.counter);
+            mybutton=(Button)itemView.findViewById(R.id.counterbutton);
         }
 
         /**
@@ -145,14 +162,45 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
      * @param i
      */
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
 
+        final int[] mynum = {eventsList.get(i).getNumber()};
+        final int k=i;
+        personViewHolder.mybutton.setOnClickListener(new View.OnClickListener()
+        {  @Override
+        public void onClick(View v) {
+            mynum[0] += 1;
+            personViewHolder.mybutton.setText("Liked");
+            personViewHolder.mybutton.setEnabled(false);
+            if(mynum[0]==1)
+            {
+                personViewHolder.number.setText(Integer.toString(mynum[0])+" person liked this");
+            }
+            else
+            {
+                personViewHolder.number.setText(Integer.toString(mynum[0])+" persons liked this");
+            }
+            mDatabaseReference.child(eventsList.get(k).getKey()).child("number").setValue(mynum[0]);
+        }
+        });
         YoYo.with(Techniques.FlipInY).playOn(personViewHolder.cv);
         personViewHolder.name.setText(eventsList.get(i).getName());
         personViewHolder.date.setText("Date : " + eventsList.get(i).getDate());
         personViewHolder.time.setText("Time : " + eventsList.get(i).getTime());
         personViewHolder.venue.setText("Venue : " + eventsList.get(i).getVenue());
         personViewHolder.description.setText(eventsList.get(i).getDescription());
+        if(mynum[0]==0)
+        {
+            personViewHolder.number.setText("You can be the first person to like this, please hurry");
+        }
+        else if(mynum[0]==1)
+        {
+            personViewHolder.number.setText(Integer.toString(mynum[0])+" person liked this");
+        }
+        else
+        {
+            personViewHolder.number.setText(Integer.toString(mynum[0])+" persons liked this");
+        }
         String imageurl = eventsList.get(i).getPhotoUrl();
        Glide.with(context).load(imageurl).into((ImageView) personViewHolder.getImage());
     }

@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener meventListener;
     private String username;
     private String mystring;
+    private String eventstring;
     /**
      * The Events list.
      */
@@ -304,6 +305,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 event = dataSnapshot.getValue(events.class);
+                eventstring= dataSnapshot.getKey();
+                event.setKey(eventstring);
                 assert event != null;
                 List<String> interestsobtained=event.getInterests();
 

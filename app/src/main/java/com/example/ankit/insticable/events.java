@@ -13,12 +13,30 @@ public class events {
     private String description;
     private List<String>interests;
     private String photoUrl;
+    private int number;
+    private String Key;
 
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String key) {
+        Key = key;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     /**
      * Instantiates a new Event.
      */
     public events() {
+        number=0;
     }
 
 
