@@ -192,7 +192,8 @@ mTimeinput=(TextInputEditText)findViewById(R.id.timecre);
 
     }
 
-
+//
+//
     /**
      * Add image of the event.
      *
