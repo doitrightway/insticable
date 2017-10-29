@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -40,7 +42,17 @@ public class settings extends AppCompatActivity {
         department=student.getDepartment();
         type=student.gettype();
         mystring= (String) intent.getExtras().getString("key");
+        TextView settingname = (TextView) findViewById(R.id.settingname);
+        settingname.setText(student.getName());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("cricketpushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("footballpushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("chesspushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("musicpushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("tennispushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("squashpushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("swimmingpushNotifications");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("carrompushNotifications");
         mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(student.getName());
         boolean isChecked =true;
         cordi = (CheckBox)findViewById(R.id.addcordi);
@@ -206,7 +218,43 @@ public class settings extends AppCompatActivity {
     }
 
     public void done(View view){
+
+        if(interests.contains("cricket"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("cricketpushNotifications");
+        }
+        if(interests.contains("football"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("footballpushNotifications");
+        }
+        if(interests.contains("tennis"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("tennispushNotifications");
+        }
+        if(interests.contains("squash"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("squashpushNotifications");
+        }
+        if(interests.contains("chess"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("chesspushNotifications");
+        }
+        if(interests.contains("carrom"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("carrompushNotifications");
+        }
+        if(interests.contains("swimming"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("swimmingpushNotifications");
+        }
+        if(interests.contains("music"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("musicpushNotifications");
+        }
+
         mDatabaseReference.child(mystring).child("interests").setValue(interests);
+
+
         hostel=text1.getText().toString();
         department=text2.getText().toString();
         if(cordi.isChecked())

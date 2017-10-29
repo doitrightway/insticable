@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +177,41 @@ public class Main4Activity extends AppCompatActivity {
      * @param view the view
      */
     public void enjoy(View view){
+        if(interests.contains("cricket"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("cricketpushNotifications");
+        }
+        if(interests.contains("football"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("footballpushNotifications");
+        }
+        if(interests.contains("tennis"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("tennispushNotifications");
+        }
+        if(interests.contains("squash"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("squashpushNotifications");
+        }
+        if(interests.contains("chess"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("chesspushNotifications");
+        }
+        if(interests.contains("carrom"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("carrompushNotifications");
+        }
+        if(interests.contains("swimming"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("swimmingpushNotifications");
+        }
+        if(interests.contains("music"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("musicpushNotifications");
+        }
         student.setinterests(interests);
+
+
         student.setCount(1);
         mDatabaseReference.push().setValue(student);
         finish();
