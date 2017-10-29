@@ -10,6 +10,8 @@ import android.widget.Button;
 
 /**
  * The type Page 7.
+ * This class is  used to diaplay page 3 of the
+ * interconnected chat groups without the hostel being considered
  */
 public class page7 extends AppCompatActivity {
     /**

@@ -9,6 +9,8 @@ import android.widget.Button;
 
 /**
  * Created by ankit on 14/10/17.
+ * This class is  used to diaplay page 1 of the
+ * interconnected chat groups
  */
 public class page1 extends AppCompatActivity {
     /**

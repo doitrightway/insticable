@@ -203,7 +203,11 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-
+    /**
+     * It innflates menu resource (defined in XML) into the Menu provided in the callback
+     * @param menu
+     * @return boolean value
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -217,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
 //        return super.onTouchEvent(event);
 //    }
 
+    /**
+     * It is used when sign out is clicked
+     * @param item
+     * @return boolean value
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

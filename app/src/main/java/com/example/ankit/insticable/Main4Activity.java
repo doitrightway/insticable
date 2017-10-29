@@ -51,7 +51,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Cricket.
-     *
+     * checkbox onClick function which adds cricket to interests list
      * @param view the view
      */
     public void cricket(View view){
@@ -66,7 +66,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Football.
-     *
+     * checkbox onClick function which adds football to interests list
      * @param view the view
      */
     public void football(View view){
@@ -82,7 +82,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Tennis.
-     *
+     * checkbox onClick function which adds tennis to interests list
      * @param view the view
      */
     public void tennis(View view){
@@ -97,7 +97,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Squash.
-     *
+     * checkbox onClick function which adds squash to interests list
      * @param view the view
      */
     public void squash(View view) {
@@ -111,7 +111,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Swimming.
-     *
+     * checkbox onClick function which adds swimming to interests list
      * @param view the view
      */
     public void swimming(View view){
@@ -126,7 +126,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Carrom.
-     *
+     * checkbox onClick function which adds carrom to interests list
      * @param view the view
      */
     public void carrom(View view){
@@ -141,7 +141,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Chess.
-     *
+     * checkbox onClick function which adds chess to interests list
      * @param view the view
      */
     public void chess(View view){
@@ -156,7 +156,7 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Music.
-     *
+     * checkbox onClick function which adds music to interests list
      * @param view the view
      */
     public void music(View view){
@@ -171,7 +171,8 @@ public class Main4Activity extends AppCompatActivity {
 
     /**
      * Enjoy.
-     *
+     * It finally pushes all the information collected
+     * in the firebase database
      * @param view the view
      */
     public void enjoy(View view){

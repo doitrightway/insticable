@@ -68,7 +68,7 @@ public class Main2Activity extends AppCompatActivity{
 
     /**
      * Coordinator.
-     *
+     * This is checkbox onClick function which sets the student type
      * @param view the view
      */
     public void coordinator(View view){
@@ -83,7 +83,7 @@ public class Main2Activity extends AppCompatActivity{
 
     /**
      * Student.
-     *
+     * This is checkbox onClick function which sets the student type
      * @param view the view
      */
     public void student(View view){
@@ -98,7 +98,8 @@ public class Main2Activity extends AppCompatActivity{
 
     /**
      * Continue 1.
-     *
+     * This function sets the student department, degree and hostel
+     * to the values inputted in layout file
      * @param view the view
      */
     public void continue1(View view){

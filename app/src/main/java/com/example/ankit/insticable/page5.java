@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 /**
  * The type Page 5.
+ * This class is  used to diaplay page 4 of the
+ * interconnected chat groups
  */
 public class page5 extends AppCompatActivity {
     /**

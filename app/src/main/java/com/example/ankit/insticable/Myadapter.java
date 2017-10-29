@@ -24,6 +24,9 @@ import java.util.List;
 
 /**
  * Created by ankit on 18/10/17.
+ * This class generates the list of buttons
+ * corresponding to specific interests of the user
+ * in Recycler View
  */
 public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
     /**
@@ -58,7 +61,7 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
 
         /**
          * Instantiates a new My view holder.
-         *
+         *This class holds the button to be used in Recycler View
          * @param itemView the item view
          */
         MyViewHolder(View itemView) {
@@ -67,11 +70,22 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
         }
     }
 
+    /**
+     * It gives the size of list of interests of the user
+     * @return Returns the size of list
+     */
     @Override
     public int getItemCount() {
         return mystudent.getinterests().size();
     }
 
+    /**
+     * This method inflates interests_activity_buttons
+     * and uses it in Recycler View
+     * @param viewGroup
+     * @param i
+     * @return A instance of ViewHolder class
+     */
     @Override
     public Myadapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.interests_activity_buttons, viewGroup, false);
@@ -80,6 +94,12 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
     }
 
 
+    /**
+     * This function actually binds the list of interests
+     * with the activity
+     * @param myViewHolder
+     * @param i
+     */
     @Override
     public void onBindViewHolder(Myadapter.MyViewHolder myViewHolder, int i) {
 

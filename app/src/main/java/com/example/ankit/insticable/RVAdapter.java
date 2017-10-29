@@ -28,6 +28,8 @@ import static java.security.AccessController.getContext;
 
 /**
  * Created by ankit on 8/10/17.
+ * This class is used to display events of
+ * user's interests in Recycler View
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
@@ -54,6 +56,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     /**
      * The type Person view holder.
+     *This class holds the view items of the xml file
+     *defining layout of the event page
      */
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         /**
@@ -89,7 +93,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
         /**
          * Instantiates a new Person view holder.
-         *
          * @param itemView the item view
          */
         PersonViewHolder(View itemView) {
@@ -113,11 +116,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         }
     }
 
+    /**
+     * It gives the size of events list
+     * @return Returns size of the events list
+     */
     @Override
     public int getItemCount() {
         return eventsList.size();
     }
 
+    /**
+     * It inflates the event page to be used in Recycler View
+     * @param viewGroup
+     * @param i
+     * @return An instance of ViewHolder class
+     */
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_main_stu, viewGroup, false);
@@ -125,6 +138,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         return pvh;
     }
 
+    /**
+     * It actually binds the xml file layout
+     * with contents received
+     * @param personViewHolder
+     * @param i
+     */
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
 

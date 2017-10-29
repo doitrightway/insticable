@@ -8,6 +8,8 @@ import android.widget.Button;
 
 /**
  * The type Page 3.
+ * This class is  used to diaplay page 3 of the
+ * interconnected chat groups
  */
 public class page3 extends AppCompatActivity {
     /**
