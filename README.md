@@ -2,7 +2,7 @@
 
 Hey guys,  
 
-The project insticable is an andoid applicaion development project where we used Android Studio for the front end development 
+The project insticable is an android applicaion development project where we used Android Studio for the front end development 
 and Firebase-a Google provided utility for managing the back end.
 
 About Insticable-
